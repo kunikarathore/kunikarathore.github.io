@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EaselJS demo: hitTest</title>
+
+	<script>
+
+		
+		function init() {
+
+			var stage = new createjs.Stage("demoCanvas");
+			
+			var holder = stage.addChild(new createjs.Container());
+			holder.x = holder.y = 200;
+			
+			for (var i=0; i<25; i++) {
+				var shape = new createjs.Shape();
+				shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50)).drawCircle(	0,0,30);
+				shape.x = Math.random()*300-150;
+				shape.y = Math.random()*300-150;
+				holder.addChild(shape); 
+						shape.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX - holder.x;
+    evt.target.y = evt.stageY - holder.y;
+    stage.update();
+});	
+			}
+
+			
+				createjs.Ticker.on("tick", tick);
+		function tick(event) {
+			var l = holder.getNumChildren();
+			for (var i=0; i<l; i++) {
+				var child = holder.getChildAt(i);
+				child.alpha = 0.4;
+				var pt = child.globalToLocal(stage.mouseX, stage.mouseY);
+				if (stage.mouseInBounds && child.hitTest(pt.x, pt.y)) { child.alpha = 1; }
+			}
+			stage.update(event);
+		}
+}
+		
+		
+			</script>
+</head>
+<body onload="init();">
+	<canvas id="demoCanvas" width="1000" height="1000">
+		alternate content
+	</canvas>
+	<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+</html>

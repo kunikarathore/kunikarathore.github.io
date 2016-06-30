@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>EaselJS Example: Drawing an animated vector bar graph.</title>
+	<script>
+  function init() {
+ var stage = new createjs.Stage("demoCanvas");
+
+
+ var rec = new createjs.Shape();
+ var circle = new createjs.Shape();
+ var circle1 = new createjs.Shape();
+ var circle2 = new createjs.Shape();
+ var circle3 = new createjs.Shape();
+ var circle4 = new createjs.Shape();
+ var circle5 = new createjs.Shape();
+   rec.graphics.beginFill("red").drawCircle(0, 0, 20);
+circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+circle1.graphics.beginFill("green").drawCircle(0, 0, 20);
+circle2.graphics.beginFill("black").drawCircle(0, 0, 20);
+circle3.graphics.beginFill("cyan").drawCircle(0, 0, 20);
+circle4.graphics.beginFill("pink").drawCircle(0, 0, 20);
+circle5.graphics.beginFill("grey").drawCircle(0, 0, 20);
+
+circle.x = 200;
+circle.y = 100;
+
+rec.x = 50;
+rec.y = 150;
+
+circle1.x = 300;
+circle1.y = 100;
+
+circle2.x = 150;
+circle2.y = 150;
+
+circle3.x = 200;
+circle3.y = 200;
+
+circle4.x = 100;
+circle4.y = 50;
+
+circle5.x = 100;
+circle5.y = 250;
+
+
+stage.addChild(rec);
+stage.addChild(circle);
+stage.addChild(circle1);
+stage.addChild(circle2);
+stage.addChild(circle3);
+stage.addChild(circle4);
+stage.addChild(circle5);
+
+
+circle.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+rec.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+circle1.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+circle2.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+circle3.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+circle4.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+circle5.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+
+stage.update();
+
+  }
+</script>
+<script type="text/javascript"></script>
+</head>
+<body onload="init();">
+  <canvas id="demoCanvas" width="500" height="300"></canvas>
+
+
+
+<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+</html>
