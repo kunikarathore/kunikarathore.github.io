@@ -14,7 +14,7 @@
    function ball(shape1){
                 
     shape1.x = 60;
-    shape1.y = 60;
+    shape1.y = 40;
     shape1.graphics.beginFill("#000000").drawCircle(shape1.x, shape1.y, 40);
    
     stage.addChild(shape1);
@@ -55,7 +55,7 @@ function tick() {
  var arr = [];
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
-        shape.y = -400;
+        shape.y = -380;
              for(var i=0; i < 9; i++){  
               shape.y += 80;
                 shape.x = -400;
@@ -111,7 +111,7 @@ function keyup(event) {
 <body onload="init();">
 
 
-    <canvas id="canvas" width="800" height="700"></canvas>
+    <canvas id="canvas" width="800" height="770"></canvas>
  
 
 
