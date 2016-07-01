@@ -3,13 +3,22 @@
 <head>
   <meta charset="utf-8">
   <title>loop</title>
+  <style type="text/css">
+  div{
+          font-size: 38px;
+    color: #0048ff;
+    font-family: cursive;
+    text-align: center;
+    width: 45%;
+  }
+    </style>
   <script type="text/javascript">
   var keys = {};
-  var stage;
+  var stage, square, circle;
     function init() {
        stage = new createjs.Stage("canvas");
-      var square = new createjs.Shape();
-      var circle = new createjs.Shape();
+       square = new createjs.Shape();
+       circle = new createjs.Shape();
        var show = stage.addChild(new createjs.Container());
   
 /*
@@ -36,6 +45,7 @@ function tick() {
  var arr = [];
  var array = [];
  tempArr = [];
+ var x = 0;
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
         shape.y = -380;
@@ -52,6 +62,7 @@ function tick() {
                   shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
                   
                   tempArr.push({rows: x, col: i});
+
                  }else{
                   shape.graphics.beginFill("white");
                  }
@@ -94,6 +105,7 @@ function tick() {
     keys[event.keyCode] = true;
      if (keys[37]) { // KEY_LEFT
       circle.x -= 80;
+
     }
 
     if (keys[38]){ 
@@ -107,15 +119,14 @@ function tick() {
     if (keys[40]){ 
       circle.y += 80;//KEY_DOWN
     }
-
-    stage.update();
+  stage.update();
 }
 
 function keyup(event) {
-   if(square.x == circle.x && square.y == circle.y){
-                     square.alpha = 0.3;
-                   }
+  x++;
     delete keys[event.keyCode];
+console.log(square.x);
+    document.getElementById('total').innerHTML = x;
 }
 
 
@@ -127,9 +138,13 @@ function keyup(event) {
  </head>
 <body onload="init();">
 
-
-    <canvas id="canvas" width="800" height="770"></canvas>
  
+<div>
+step
+<span id="total">
+</span> 
+</div>
+    <canvas id="canvas" width="800" height="770"></canvas>
 
 
 
