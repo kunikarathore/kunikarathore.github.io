@@ -11,26 +11,7 @@
       var square = new createjs.Shape();
       var circle = new createjs.Shape();
        var show = stage.addChild(new createjs.Container());
-   function ball(shape1){
-                
-    shape1.x = 60;
-    shape1.y = 40;
-    shape1.graphics.beginFill("#000000").drawCircle(shape1.x, shape1.y, 40);
-   
-    stage.addChild(shape1);
-          //  createjs.Ticker.addEventListener("tick", tick);
-    
-      // createjs.Ticker.framerate =6;
-    this.document.onkeydown = keydown;
-    this.document.onkeyup = keyup;
-              }
-              ball(circle);
-
-      
-
-        
-      
-      stage.update();
+  
 /*
 function tick() {
     if (keys[37]) { // KEY_LEFT
@@ -53,28 +34,61 @@ function tick() {
 }
 */
  var arr = [];
+ var array = [];
+ tempArr = [];
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
         shape.y = -380;
              for(var i=0; i < 9; i++){  
               shape.y += 80;
                 shape.x = -400;
-              arr.push(shape.y);
+                arr.push(shape.y);
                 for(var x=0; x < 10; x++){
                   shape.x += 80;
                  arr.push(shape.x);
                  shape.graphics.beginStroke("black").drawRect(shape.x, shape.y, 80, 80);
 
+                 if(x === (Math.floor(Math.random() * (9 - 1)) + 1) || i === (Math.floor(Math.random() * (9 - 1)) + 1)){
+                  shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
+                  
+                  tempArr.push({rows: x, col: i});
+                 }else{
+                  shape.graphics.beginFill("white");
+                 }
                 stage.addChild(shape);
+              
+                //console.log(array[Math.floor(Math.random() * (9 - 1))]);
+             
+               //graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
                 }
               }
             
                
 
-            
+            //array[Math.floor(Math.random() * (9 - 1)) + 1].graphics.beginFill("black");  
 
       }
       grid(square);
+       function ball(shape1){
+                
+    shape1.x = 60;
+    shape1.y = 40;
+    shape1.graphics.beginLinearGradientFill(["red","#D28B8B"], [0, 1], 0, 20, 0, 80).drawCircle(shape1.x, shape1.y, 40);
+   
+    stage.addChild(shape1);
+          //  createjs.Ticker.addEventListener("tick", tick);
+    
+      // createjs.Ticker.framerate =6;
+    this.document.onkeydown = keydown;
+    this.document.onkeyup = keyup;
+              }
+              ball(circle);
+
+      
+
+        
+      
+      stage.update();
       // trail
       function keydown(event) {
     keys[event.keyCode] = true;
@@ -98,6 +112,9 @@ function tick() {
 }
 
 function keyup(event) {
+   if(square.x == circle.x && square.y == circle.y){
+                     square.alpha = 0.3;
+                   }
     delete keys[event.keyCode];
 }
 
