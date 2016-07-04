@@ -42,6 +42,8 @@ function tick() {
     stage.update();
 }
 */
+ show.x = -800;
+ show.y = -760;
  var arr = [];
  var array = [];
  tempArr = [];
@@ -50,10 +52,10 @@ function tick() {
  var x = 0;
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
-        shape.y = -380;
+        shape.y = 0;
              for(var i=0; i < 9; i++){  
               shape.y += 80;
-                shape.x = -400;
+                shape.x = 0;
                 arr.push(shape.y);
                 for(var x=0; x < 10; x++){
                   shape.x += 80;
@@ -62,16 +64,17 @@ function tick() {
 
                  if(x === (Math.floor(Math.random() * (8 - 1)) + 1) || i === (Math.floor(Math.random() * (8 - 1)) + 1)){
                   shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
-                  
-                   tempArr.push(shape.x);
-                  array.push(shape.y);
+                  tempArr.push({rows: i, cols: x,sx: shape.x, sy: shape.y});
+console.log(tempArr);
+                   //tempArr.push(shape.x);
+                  //array.push(shape.y);
 // array.push(shape);
 
 
                  }else{
                   shape.graphics.beginFill("white");
                  }
-                stage.addChild(shape);
+                show.addChild(shape);
 
                 }
 
@@ -134,6 +137,7 @@ function keyup(event) {
  /* cirx.push(circle.x += circle.x);
    ciry.push(circle.y);
 console.log(cirx);*/
+return false;
  var isCircleBlocked = false;
     for(i=0; i<=tempArr.length; i++){
       var sqrx = tempArr[i];
@@ -167,7 +171,7 @@ step
 <span id="total">
 </span> 
 </div>
-    <canvas id="canvas" width="800" height="770"></canvas>
+    <canvas id="canvas" width="800" height="800"></canvas>
 
 
 
