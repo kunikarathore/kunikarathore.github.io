@@ -14,7 +14,7 @@
     </style>
   <script type="text/javascript">
   var keys = {};
-  var stage, square, circle, sqx, sqy;
+  var stage,sx, square, circle, sqx, sqy;
     function init() {
        stage = new createjs.Stage("canvas");
        square = new createjs.Shape();
@@ -64,8 +64,10 @@ function tick() {
 
                  if(x === (Math.floor(Math.random() * (8 - 1)) + 1) || i === (Math.floor(Math.random() * (8 - 1)) + 1)){
                   shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
-                  tempArr.push({rows: i, cols: x,sx: shape.x, sy: shape.y});
-console.log(tempArr);
+                 // tempArr.push({rows: i, cols: x,sx: shape.x, sy: shape.y});
+                 tempArr.push(shape.y);
+                  array.push(shape.x);
+                     
                    //tempArr.push(shape.x);
                   //array.push(shape.y);
 // array.push(shape);
@@ -75,16 +77,17 @@ console.log(tempArr);
                   shape.graphics.beginFill("white");
                  }
                 show.addChild(shape);
-
+console.log(shape.y);
                 }
 
               }
             
-               
 
             //array[Math.floor(Math.random() * (9 - 1)) + 1].graphics.beginFill("black");  
 
       }
+
+console.log(square.y);
       grid(square);
        function ball(shape1){
                 
@@ -137,7 +140,7 @@ function keyup(event) {
  /* cirx.push(circle.x += circle.x);
    ciry.push(circle.y);
 console.log(cirx);*/
-return false;
+
  var isCircleBlocked = false;
     for(i=0; i<=tempArr.length; i++){
       var sqrx = tempArr[i];
@@ -145,18 +148,17 @@ return false;
        var val1 = Math.abs(sqrx - circle.x);
         var val2 = Math.abs(sqry - circle.y);
         var dist = Math.sqrt(val1*val1 + val2*val2);
-        if(dist < 20){
-circle.x = Math.abs(sqrx);
-circle.y = Math.abs(sqry);
-       ball(circle);
-       isCircleBlocked = true;
+        if((dist - 80) <= 80){
+square.graphics.beginFill("white");
+      alert("hjh");
+       //isCircleBlocked = true;
         }
         else{
           console.log("go");
         }
     }
 }
-
+  
      
 
     }
