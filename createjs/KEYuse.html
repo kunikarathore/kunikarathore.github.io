@@ -45,8 +45,8 @@ function tick() {
  var arr = [];
  var array = [];
  tempArr = [];
- var cirx = [];
- var ciry = [];
+ /*var cirx = [];
+ var ciry = [];*/
  var x = 0;
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
@@ -131,13 +131,29 @@ function keyup(event) {
     delete keys[event.keyCode];
 
     document.getElementById('total').innerHTML = x;
-  cirx.push(circle.x);
+ /* cirx.push(circle.x += circle.x);
    ciry.push(circle.y);
-
+console.log(cirx);*/
+ var isCircleBlocked = false;
+    for(i=0; i<=tempArr.length; i++){
+      var sqrx = tempArr[i];
+       var sqry = array[i];
+       var val1 = Math.abs(sqrx - circle.x);
+        var val2 = Math.abs(sqry - circle.y);
+        var dist = Math.sqrt(val1*val1 + val2*val2);
+        if(dist < 20){
+circle.x = Math.abs(sqrx);
+circle.y = Math.abs(sqry);
+       ball(circle);
+       isCircleBlocked = true;
+        }
+        else{
+          console.log("go");
+        }
+    }
 }
 
-
-    
+     
 
     }
     
