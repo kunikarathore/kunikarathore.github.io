@@ -14,7 +14,7 @@
     </style>
   <script type="text/javascript">
   var keys = {};
-  var stage, square, circle;
+  var stage, square, circle, sqx, sqy;
     function init() {
        stage = new createjs.Stage("canvas");
        square = new createjs.Shape();
@@ -45,6 +45,8 @@ function tick() {
  var arr = [];
  var array = [];
  tempArr = [];
+ var cirx = [];
+ var ciry = [];
  var x = 0;
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
       function grid(shape) {
@@ -58,20 +60,21 @@ function tick() {
                  arr.push(shape.x);
                  shape.graphics.beginStroke("black").drawRect(shape.x, shape.y, 80, 80);
 
-                 if(x === (Math.floor(Math.random() * (9 - 1)) + 1) || i === (Math.floor(Math.random() * (9 - 1)) + 1)){
+                 if(x === (Math.floor(Math.random() * (8 - 1)) + 1) || i === (Math.floor(Math.random() * (8 - 1)) + 1)){
                   shape.graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
                   
-                  tempArr.push({rows: x, col: i});
+                   tempArr.push(shape.x);
+                  array.push(shape.y);
+// array.push(shape);
+
 
                  }else{
                   shape.graphics.beginFill("white");
                  }
                 stage.addChild(shape);
-              
-                //console.log(array[Math.floor(Math.random() * (9 - 1))]);
-             
-               //graphics.beginFill(createjs.Graphics.getHSL(Math.random()*360,100,50));
+
                 }
+
               }
             
                
@@ -103,6 +106,7 @@ function tick() {
       // trail
       function keydown(event) {
     keys[event.keyCode] = true;
+
      if (keys[37]) { // KEY_LEFT
       circle.x -= 80;
 
@@ -118,15 +122,18 @@ function tick() {
 
     if (keys[40]){ 
       circle.y += 80;//KEY_DOWN
-    }
+       }
   stage.update();
 }
 
 function keyup(event) {
   x++;
     delete keys[event.keyCode];
-console.log(square.x);
+
     document.getElementById('total').innerHTML = x;
+  cirx.push(circle.x);
+   ciry.push(circle.y);
+
 }
 
 
