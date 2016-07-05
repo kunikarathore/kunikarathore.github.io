@@ -20,6 +20,7 @@
        square = new createjs.Shape();
        circle = new createjs.Shape();
        var show = stage.addChild(new createjs.Container());
+       var ball1 = stage.addChild(new createjs.Container());
   
 /*
 function tick() {
@@ -42,6 +43,8 @@ function tick() {
     stage.update();
 }
 */
+ball1.x = -40;
+ball1.y =-80;
  show.x = -800;
  show.y = -760;
  var arr = [];
@@ -51,6 +54,20 @@ function tick() {
  var ciry = [];*/
  var x = 0;
       // var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
+      function ball(shape1){
+                
+    shape1.x = 80;
+    shape1.y = 80;
+    shape1.graphics.beginLinearGradientFill(["red","#D28B8B"], [0, 1], 0, 20, 0, 80).drawCircle(shape1.x, shape1.y, 40);
+   
+    ball1.addChild(shape1);
+          //  createjs.Ticker.addEventListener("tick", tick);
+    
+      // createjs.Ticker.framerate =6;
+    this.document.onkeydown = keydown;
+    this.document.onkeyup = keyup;
+              }
+              ball(circle);
       function grid(shape) {
         shape.y = 0;
              for(var i=0; i < 9; i++){  
@@ -73,11 +90,13 @@ function tick() {
 // array.push(shape);
 
 
-                 }else{
+
+                 }
+                 else{
                   shape.graphics.beginFill("white");
                  }
                 show.addChild(shape);
-console.log(shape.y);
+//console.log(shape.y);
                 }
 
               }
@@ -87,25 +106,11 @@ console.log(shape.y);
 
       }
 
-console.log(square.y);
       grid(square);
-       function ball(shape1){
-                
-    shape1.x = 60;
-    shape1.y = 40;
-    shape1.graphics.beginLinearGradientFill(["red","#D28B8B"], [0, 1], 0, 20, 0, 80).drawCircle(shape1.x, shape1.y, 40);
-   
-    stage.addChild(shape1);
-          //  createjs.Ticker.addEventListener("tick", tick);
-    
-      // createjs.Ticker.framerate =6;
-    this.document.onkeydown = keydown;
-    this.document.onkeyup = keyup;
-              }
-              ball(circle);
+       
 
       
-
+console.log(circle.x);
         
       
       stage.update();
@@ -129,6 +134,7 @@ console.log(square.y);
     if (keys[40]){ 
       circle.y += 80;//KEY_DOWN
        }
+
   stage.update();
 }
 
@@ -141,22 +147,16 @@ function keyup(event) {
    ciry.push(circle.y);
 console.log(cirx);*/
 
- var isCircleBlocked = false;
-    for(i=0; i<=tempArr.length; i++){
-      var sqrx = tempArr[i];
-       var sqry = array[i];
-       var val1 = Math.abs(sqrx - circle.x);
-        var val2 = Math.abs(sqry - circle.y);
-        var dist = Math.sqrt(val1*val1 + val2*val2);
-        if((dist - 80) <= 80){
-square.graphics.beginFill("white");
-      alert("hjh");
-       //isCircleBlocked = true;
-        }
-        else{
-          console.log("go");
-        }
-    }
+for(var y = 0; y <= tempArr.length; y++){
+  if((array[y] + 80) === circle.x && tempArr[y] === circle.y){
+  console.log("colored");
+  console.log(array[y]);
+  console.log(circle.x);
+}
+else{
+  
+}
+}
 }
   
      
