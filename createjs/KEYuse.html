@@ -146,12 +146,14 @@ function keyup(event) {
  /* cirx.push(circle.x += circle.x);
    ciry.push(circle.y);
 console.log(cirx);*/
-
-for(var y = 0; y <= tempArr.length; y++){
+//var isCircleBlocked = false;
+for(var y = 0; y <= (tempArr.length); y++){
   if((array[y] + 80) === circle.x && tempArr[y] === circle.y){
-  console.log("colored");
-  console.log(array[y]);
-  console.log(circle.x);
+console.log("colored");
+ /*   console.log(array[y]);
+  console.log(circle.x);*/
+ alert("GAME OVER");
+ window.location.reload();
 }
 else{
   
