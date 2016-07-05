@@ -24,7 +24,7 @@
         var endShape = new createjs.Shape();
         var show = stage.addChild(new createjs.Container());
         var ball1 = stage.addChild(new createjs.Container());
-         var end = stage.addChild(new createjs.Container());
+        var end = stage.addChild(new createjs.Container());
 
         /*
         function tick() {
@@ -48,14 +48,14 @@
         }
         */
         var txt = new createjs.Text();
-txt.font = "bold 20px Dorsa";
-txt.color = "WHITE";
-txt.text = "END";
-txt.x =740;
-txt.y = 700;
-            stage.addChild(txt);
-            stage.update();
-      endShape.graphics.beginFill("black").drawRect(0, 0, 80, 80);
+        txt.font = "bold 20px Dorsa";
+        txt.color = "WHITE";
+        txt.text = "END";
+        txt.x = 740;
+        txt.y = 710;
+        stage.addChild(txt);
+        stage.update();
+        endShape.graphics.beginFill("black").drawRect(0, 0, 80, 80);
         end.addChild(endShape);
         ball1.x = -40;
         ball1.y = -80;
@@ -123,10 +123,10 @@ txt.y = 700;
         }
 
         grid(square);
-  
 
 
-        console.log(circle.x);
+
+      //  console.log(circle.x);
 
 
         stage.update();
@@ -172,12 +172,11 @@ console.log(cirx);*/
                     alert("GAME OVER");
                     window.location.reload();
 
-                } else if (circle.x  === 720 && circle.y === 720) {
-                         alert("YOU WON WITH " + x + " STEPS");
-                         location.reload();
-                         break;
-                }
-                 else {
+                } else if (circle.x === 720 && circle.y === 720) {
+                    alert("YOU WON WITH " + x + " STEPS");
+                    location.reload();
+                    break;
+                } else {
 
                 }
             }
@@ -190,7 +189,6 @@ console.log(cirx);*/
 </head>
 
 <body onload="init();">
-
     <div>
         step
         <span id="total">
