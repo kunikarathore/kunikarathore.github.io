@@ -47,6 +47,14 @@
             stage.update();
         }
         */
+        var txt = new createjs.Text();
+txt.font = "bold 20px Dorsa";
+txt.color = "WHITE";
+txt.text = "END";
+txt.x =740;
+txt.y = 700;
+            stage.addChild(txt);
+            stage.update();
       endShape.graphics.beginFill("black").drawRect(0, 0, 80, 80);
         end.addChild(endShape);
         ball1.x = -40;
@@ -66,7 +74,7 @@
 
             shape1.x = 80;
             shape1.y = 80;
-            shape1.graphics.beginLinearGradientFill(["red", "#D28B8B"], [0, 1], 0, 20, 0, 80).drawCircle(shape1.x, shape1.y, 40);
+            shape1.graphics.beginLinearGradientFill(["red", "#D28B8B"], [0, 1], 0, 20, 0, 120).drawCircle(shape1.x, shape1.y, 40);
 
             ball1.addChild(shape1);
             //  createjs.Ticker.addEventListener("tick", tick);
@@ -165,8 +173,9 @@ console.log(cirx);*/
                     window.location.reload();
 
                 } else if (circle.x  === 720 && circle.y === 720) {
-                         alert("YOU WOn");
+                         alert("YOU WON WITH " + x + " STEPS");
                          location.reload();
+                         break;
                 }
                  else {
 
@@ -181,6 +190,7 @@ console.log(cirx);*/
 </head>
 
 <body onload="init();">
+
     <div>
         step
         <span id="total">
