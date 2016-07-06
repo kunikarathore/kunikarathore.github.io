@@ -5,6 +5,7 @@
 	<title>EaselJS Example: Drawing an animated vector bar graph.</title>
 	<script>
 	var stage, movRectangle, play, cloud;
+  var keys = {};
 	function init(){
 		stage = new createjs.Stage("canvas");
 		  // container for cloud
@@ -23,10 +24,13 @@
            movRectangle = new createjs.Shape();
            play= new createjs.Shape();
 
-           play.graphics.beginFill("black").drawCircle(0, 0, 80);
+           play.graphics.beginFill("black").drawCircle(0, 0, 40);
            //movRectangle.x =0;
           // movRectangle.y =0;
            box2.addChild(play);
+       this.document.onkeydown = keydown;
+    this.document.onkeyup = keyup;
+
           // function for moving square
           var color = ["red", "black", "blue"];
           var array = [];
@@ -49,6 +53,7 @@ square(movRectangle);
 
               createjs.Tween.get(movRectangle, { loop: true })
               .to({ x: 1200 }, 4000, createjs.Ease.getPowInOut(1));
+              
   
             createjs.Ticker.setFPS(60);
             createjs.Ticker.addEventListener("tick", stage);
@@ -57,6 +62,24 @@ square(movRectangle);
 		    var image = new Image();
             image.src = "img/cloud.jpg";
             image.onload = handleImageLoad;
+  function keydown(event) {
+    keys[event.keyCode] = true;
+     if (keys[32]) { // KEY_LEFT
+
+      createjs.Tween.get(play, { loop: false })
+      .to({ y: -400 }, 2000, createjs.Ease.bounceIn)
+      .to({ y: 20 }, 1000, createjs.Ease.bounceOut);
+                              //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
+             // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
+    }
+
+    
+    stage.update();
+}
+
+function keyup(event) {
+    delete keys[event.keyCode];
+}
 }
 
 
@@ -67,7 +90,9 @@ square(movRectangle);
             var bitmap = new createjs.Bitmap(image);
            cloud.addChild(bitmap);
             stage.update();
-        }
+       
+
+ }
 
 	
 	
