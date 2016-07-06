@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>EaselJS Example: Drawing an animated vector bar graph.</title>
+	<script>
+	var stage, movRectangle, play, cloud;
+	function init(){
+		stage = new createjs.Stage("canvas");
+		  // container for cloud
+		   cloud = stage.addChild(new createjs.Container());
+		   cloud.x = 50;
+           cloud.y = 20;
+          // container for moving movRectangle
+           var box = stage.addChild(new createjs.Container());
+           box.x = -400;
+           box.y = 400;
+
+            var box2 = stage.addChild(new createjs.Container());
+           box2.x = 300;
+           box2.y = 700;
+          //shape
+           movRectangle = new createjs.Shape();
+           play= new createjs.Shape();
+
+           play.graphics.beginFill("black").drawCircle(0, 0, 80);
+           //movRectangle.x =0;
+          // movRectangle.y =0;
+           box2.addChild(play);
+          // function for moving square
+          var color = ["red", "black", "blue"];
+          var array = [];
+function square(shape){
+		
+		for(i=0; i <3; i++){
+			shape.x += 0;
+	shape.x += 80;
+	shape.y = 0;
+	array.push(shape);	
+shape.graphics.beginFill(color[i]).drawRect(shape.x, shape.y, 80, 80);
+ box.addChild(shape);
+	}
+
+}
+//square(movRectangle);
+square(movRectangle);
+             // createjs.Tween.get(movRectangle, { loop: true })
+              //.to({ x: 4000 }, 4000, createjs.Ease.getPowInOut(1));
+
+              createjs.Tween.get(movRectangle, { loop: true })
+              .to({ x: 1200 }, 4000, createjs.Ease.getPowInOut(1));
+  
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.addEventListener("tick", stage);
+           stage.update();
+		  // Image of cloud
+		    var image = new Image();
+            image.src = "img/cloud.jpg";
+            image.onload = handleImageLoad;
+}
+
+
+
+// ========================== ------------------------------ ======================================
+            function handleImageLoad(event) {
+            var image = event.target;
+            var bitmap = new createjs.Bitmap(image);
+           cloud.addChild(bitmap);
+            stage.update();
+        }
+
+	
+	
+	</script>
+	</head>
+<body onload="init();">
+  <canvas id="canvas" width="800" height="1000"></canvas>
+
+
+<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+</html>
