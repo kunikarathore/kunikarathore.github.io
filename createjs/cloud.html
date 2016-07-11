@@ -20,6 +20,13 @@
             var box2 = stage.addChild(new createjs.Container());
            box2.x = 300;
            box2.y = 700;
+           // text 
+        var txt = new createjs.Text();
+        txt.font = "bold 60px Dorsa";
+        txt.color = "black";
+        txt.text = "you won!";
+        txt.x = 200;
+        txt.y = 100;
           //shape
            movRectangle = new createjs.Shape();
            play= new createjs.Shape();
@@ -74,10 +81,11 @@ square(movRectangle);
       .to({ y: 50 }, 800);
 if(play.y <= -500){
   //play.y = reach;
-  
+  play.visible = false;
+  stage.addChild(txt);
   console.log(play.y);
   // alert(reach);
-   window.location.reload();
+ //  window.location.reload();
 
  
       }
