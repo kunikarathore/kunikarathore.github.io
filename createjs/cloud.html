@@ -70,20 +70,21 @@ square(movRectangle);
             image.src = "img/cloud.jpg";
             image.onload = handleImageLoad;
 
-            var reach = -200,
+            var reach = -10,
             isReached = false;
   function keydown(event) {
     keys[event.keyCode] = true;
      if (keys[32]) { // KEY_LEFT
             reach -= 100;
      createjs.Tween.get(play, { override:true})
-      .to({ y: reach }, 1000)
+      .to({ y: reach }, 500)
       .to({ y: 50 }, 800);
-if(play.y <= -500){
+      console.log(play.y);
+if(play.y <= -220){
   //play.y = reach;
   play.visible = false;
   stage.addChild(txt);
-  console.log(play.y);
+  console.log("you" + play.y);
   // alert(reach);
  //  window.location.reload();
 
