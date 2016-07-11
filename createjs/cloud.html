@@ -66,10 +66,11 @@ square(movRectangle);
     keys[event.keyCode] = true;
      if (keys[32]) { // KEY_LEFT
 
-     createjs.Tween.get(play, { loop: true })
-      .to({ y: -500 }, 800)
-     .to({ y: 50 }, 1000);
+     createjs.Tween.get(play, { override:true})
+      .to({ y: -500 }, 1000)
 
+     .to({ y: 50 }, 1000);
+ play .gotoAndStop(0);
       //play.y += 5;
   
 console.log(play.y);
