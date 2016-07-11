@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>EaselJS Example: Drawing an animated vector bar graph.</title>
+	<title>cloud</title>
 	<script>
 	var stage, movRectangle, play, cloud;
   var keys = {};
@@ -62,30 +62,64 @@ square(movRectangle);
 		    var image = new Image();
             image.src = "img/cloud.jpg";
             image.onload = handleImageLoad;
+
+            var reach = -200,
+            isReached = false;
   function keydown(event) {
     keys[event.keyCode] = true;
      if (keys[32]) { // KEY_LEFT
-
+            reach -= 100;
      createjs.Tween.get(play, { override:true})
-      .to({ y: -500 }, 1000)
+      .to({ y: reach }, 1000)
+      .to({ y: 50 }, 800);
+if(play.y <= -500){
+  //play.y = reach;
+  
+  console.log(play.y);
+  // alert(reach);
+   window.location.reload();
 
-     .to({ y: 50 }, 1000);
- play .gotoAndStop(0);
+ 
+      }
+ 
       //play.y += 5;
   
-console.log(play.y);
+//console.log(play.y);
      // .to({ y: 20 }, 1000, createjs.Ease.bounceOut);
       
                               //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
              // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
     }
 
+
     
     stage.update();
 }
+/*
+var startPos = 0,
+isReached = false;
+function keydown(event) {
+     keys[event.keyCode] = true;
+      if (keys[32]) { // KEY_LEFT
+   //console.log(createjs.Tween.get(play))
+   if(startPos >= -500){
+     startPos -= 30;
 
+       createjs.Tween.get(play, { override:true})
+        .to({ y: startPos }, 1000).to({ y: 50});
+    }else{
+       
+     
+     alert("You Won !!!");
+     window.location.reload();
+     //alert("You Won !!!");
+   }
+ }
+}
+*/
 function keyup(event) {
     delete keys[event.keyCode];
+
 }
 }
 
