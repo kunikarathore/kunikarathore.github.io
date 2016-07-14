@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>cloud</title>
 	<script>
-	var stage, movRectangle, play, cloud;
+	var stage, movRectangle, play, cloud, squaree;
   var keys = {};
 	function init(){
 		stage = new createjs.Stage("canvas");
@@ -30,11 +30,16 @@
           //shape
            movRectangle = new createjs.Shape();
            play= new createjs.Shape();
+           squaree = new createjs.Shape();
 
-           play.graphics.beginFill("black").drawCircle(0, 0, 40);
+           play.graphics.beginFill("black").drawRect(0, 0, 40, 40);
+           squaree.graphics.beginFill("blue").drawRect(0, 0, 40, 40);
            //movRectangle.x =0;
           // movRectangle.y =0;
+           squaree.x = 10;
+           squaree.y = 50;
            box2.addChild(play);
+           box2.addChild(squaree);
        this.document.onkeydown = keydown;
     this.document.onkeyup = keyup;
 
@@ -80,11 +85,30 @@ square(movRectangle);
       .to({ y: reach }, 500)
       .to({ y: 50 }, 800);
       console.log(play.y);
-if(play.y <= -220){
+
+
+       if (squaree.x < play.x + 40 &&
+        squaree.x + 40 > play.x &&
+        squaree.y < play.y + 40 &&
+        40 + squaree.y > play.y) {
+        // collision detected!
+       alert("game over");
+       
+        box2.addChild(squaree);
+         squaree.graphics.beginFill("red");
+           //movRectangle.x =0;
+    } else {
+        // no collision
+        console.log("not done");
+    }
+
+
+if(play.y <= -350){
   //play.y = reach;
   play.visible = false;
   stage.addChild(txt);
   console.log("you" + play.y);
+  
   // alert(reach);
  //  window.location.reload();
 
@@ -101,8 +125,8 @@ if(play.y <= -220){
     }
 
 
-    
-    stage.update();
+      
+      stage.update();
 }
 /*
 var startPos = 0,
@@ -156,3 +180,5 @@ function keyup(event) {
 <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
 </html>
+<!--http://developer.sonymobile.com/unlockbootloader/imei-verification/957cbaf2bf555b5d7c8db16b9c9c74da/ ============ for phone ===========-->
+
