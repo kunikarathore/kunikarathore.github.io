@@ -50,11 +50,11 @@
         squaree = new createjs.Shape();
 
         play.graphics.beginFill("black").drawRect(0, 0, 40, 40);
-        squaree.graphics.beginFill("blue").drawRect(0, 0, 40, 40);
+        squaree.graphics.beginFill("blue").drawRect(0, 0, 80, 80);
         //movRectangle.x =0;
         // movRectangle.y =0;
-        squaree.x = 10;
-        squaree.y = -50;
+        squaree.x = -200;
+        squaree.y = -200;
         box2.addChild(play);
         box2.addChild(squaree);
         this.document.onkeydown = keydown;
@@ -81,14 +81,14 @@
         // createjs.Tween.get(movRectangle, { loop: true })
         //.to({ x: 4000 }, 4000, createjs.Ease.getPowInOut(1));
 
-        createjs.Tween.get(movRectangle, {
+        createjs.Tween.get(squaree, {
                 loop: true
             })
             .to({
-                x: 1000
+                x: 200
             }, 4000, createjs.Ease.getPowInOut(1))
             .to({
-                x: 200
+                x: -200
             }, 4000, createjs.Ease.getPowInOut(1));
 
 
@@ -106,13 +106,13 @@
         function checkCollision() {
             //square bounding box
             if (squaree.x < play.x + 40 &&
-                squaree.x + 40 > play.x &&
+                squaree.x + 80 > play.x &&
                 squaree.y < play.y + 40 &&
-                40 + squaree.y > play.y) {
+                80 + squaree.y > play.y) {
                 // collision detected!
                 //square.graphics.beginFill("#F4F4F4");
           console.log("Collision Detected");
-              squaree.y -= 100;
+              alert("you loose");
             } else {
                 // no collision
                 //square.graphics.beginFill("#FF0000");
