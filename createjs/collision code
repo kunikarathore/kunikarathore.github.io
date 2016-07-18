@@ -1,0 +1,8 @@
+// Rect Collision
+var intersection = ndgmr.checkRectCollision(bitmap1,bitmap2);
+// intersection is null if no collision, otherwise a {x,y,width,height}-Object is returned
+
+// Pixel Perfect Collision
+var collision = ndgmr.checkPixelCollision(bitmap1,bitmap2,alphaThreshold);
+// true or false
+// alphaThreshold default is 0, set to higher value to ignore collisions with semi transparent pixels

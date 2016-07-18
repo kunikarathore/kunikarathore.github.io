@@ -1,184 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>cloud</title>
-	<script>
-	var stage, movRectangle, play, cloud, squaree;
-  var keys = {};
-	function init(){
-		stage = new createjs.Stage("canvas");
-		  // container for cloud
-		   cloud = stage.addChild(new createjs.Container());
-		   cloud.x = 50;
-           cloud.y = 20;
-          // container for moving movRectangle
-           var box = stage.addChild(new createjs.Container());
-           box.x = -400;
-           box.y = 400;
 
-            var box2 = stage.addChild(new createjs.Container());
-           box2.x = 300;
-           box2.y = 700;
-           // text 
+<head>
+    <meta charset="utf-8">
+    <title>cloud</title>
+    <script>
+    var stage, movRectangle, play, cloud, squaree;
+    var keys = {};
+
+    function init() {
+        stage = new createjs.Stage("canvas");
+        // container for cloud
+        cloud = stage.addChild(new createjs.Container());
+        cloud.x = 50;
+        cloud.y = 20;
+        // container for moving movRectangle
+        var box = stage.addChild(new createjs.Container());
+        box.x = -400;
+        box.y = 400;
+
+        var box2 = stage.addChild(new createjs.Container());
+        box2.x = 300;
+        box2.y = 700;
+        // text 
         var txt = new createjs.Text();
         txt.font = "bold 60px Dorsa";
         txt.color = "black";
         txt.text = "you won!";
         txt.x = 200;
         txt.y = 100;
-          //shape
-           movRectangle = new createjs.Shape();
-           play= new createjs.Shape();
-           squaree = new createjs.Shape();
-
-           play.graphics.beginFill("black").drawRect(0, 0, 40, 40);
-           squaree.graphics.beginFill("blue").drawRect(0, 0, 40, 40);
-           //movRectangle.x =0;
-          // movRectangle.y =0;
-           squaree.x = 10;
-           squaree.y = 50;
-           box2.addChild(play);
-           box2.addChild(squaree);
-       this.document.onkeydown = keydown;
-    this.document.onkeyup = keyup;
-
-          // function for moving square
-          var color = ["red", "black", "blue"];
-          var array = [];
-function square(shape){
-		
-		for(i=0; i <3; i++){
-			shape.x += 0;
-	shape.x += 80;
-	shape.y = 0;
-	array.push(shape);	
-shape.graphics.beginFill(color[i]).drawRect(shape.x, shape.y, 80, 80);
- box.addChild(shape);
-	}
-
-}
-//square(movRectangle);
-square(movRectangle);
-             // createjs.Tween.get(movRectangle, { loop: true })
-              //.to({ x: 4000 }, 4000, createjs.Ease.getPowInOut(1));
-
-              createjs.Tween.get(movRectangle, { loop: true })
-              .to({ x: 1200 }, 4000, createjs.Ease.getPowInOut(1));
-              
-  
-            createjs.Ticker.setFPS(60);
-            createjs.Ticker.addEventListener("tick", stage);
-           stage.update();
-		  // Image of cloud
-		    var image = new Image();
-            image.src = "img/cloud.jpg";
-            image.onload = handleImageLoad;
-
-            var reach = -10,
-            isReached = false;
-  function keydown(event) {
-    keys[event.keyCode] = true;
-     if (keys[32]) { // KEY_LEFT
-            reach -= 100;
-     createjs.Tween.get(play, { override:true})
-      .to({ y: reach }, 500)
-      .to({ y: 50 }, 800);
-      console.log(play.y);
 
 
-       if (squaree.x < play.x + 40 &&
-        squaree.x + 40 > play.x &&
-        squaree.y < play.y + 40 &&
-        40 + squaree.y > play.y) {
-        // collision detected!
-       alert("game over");
-       
+
+
+        var movRectangle2 = new createjs.Shape();
+        movRectangle2.graphics.beginFill("black").drawRect(0, 0, 80, 80);
+
+        movRectangle2.x = 500;
+        movRectangle2.y = 0;
+        //box.addChild(movRectangle2);
+
+
+
+
+
+        //shape
+        movRectangle = new createjs.Shape();
+        play = new createjs.Shape();
+        squaree = new createjs.Shape();
+
+        play.graphics.beginFill("black").drawRect(0, 0, 40, 40);
+        squaree.graphics.beginFill("blue").drawRect(0, 0, 40, 40);
+        //movRectangle.x =0;
+        // movRectangle.y =0;
+        squaree.x = 10;
+        squaree.y = -50;
+        box2.addChild(play);
         box2.addChild(squaree);
-         squaree.graphics.beginFill("red");
-           //movRectangle.x =0;
-    } else {
-        // no collision
-        console.log("not done");
-    }
+        this.document.onkeydown = keydown;
+        this.document.onkeyup = keyup;
+
+        // function for moving square
+        var color = ["red", "black", "blue"];
+        var array = [];
+
+        function square(shape) {
+
+            for (i = 0; i < 1; i++) {
+                shape.x += 0;
+                shape.x += 80;
+                shape.y = 0;
+                array.push(shape);
+                shape.graphics.beginFill(color[i]).drawRect(shape.x, shape.y, 80, 80);
+                box.addChild(shape);
+            }
+
+        }
+        //square(movRectangle);
+        square(movRectangle);
+        // createjs.Tween.get(movRectangle, { loop: true })
+        //.to({ x: 4000 }, 4000, createjs.Ease.getPowInOut(1));
+
+        createjs.Tween.get(movRectangle, {
+                loop: true
+            })
+            .to({
+                x: 1000
+            }, 4000, createjs.Ease.getPowInOut(1))
+            .to({
+                x: 200
+            }, 4000, createjs.Ease.getPowInOut(1));
 
 
-if(play.y <= -350){
-  //play.y = reach;
-  play.visible = false;
-  stage.addChild(txt);
-  console.log("you" + play.y);
-  
-  // alert(reach);
- //  window.location.reload();
+        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener("tick", stage);
+        stage.update();
+        // Image of cloud
+        var image = new Image();
+        image.src = "img/cloud.jpg";
+        image.onload = handleImageLoad;
 
- 
-      }
- 
-      //play.y += 5;
-  
-//console.log(play.y);
-     // .to({ y: 20 }, 1000, createjs.Ease.bounceOut);
-      
-                              //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
-             // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
-    }
+        var reach = -10,
+            isReached = false;
 
+        function checkCollision() {
+            //square bounding box
+            if (squaree.x < play.x + 40 &&
+                squaree.x + 40 > play.x &&
+                squaree.y < play.y + 40 &&
+                40 + squaree.y > play.y) {
+                // collision detected!
+                //square.graphics.beginFill("#F4F4F4");
+          console.log("Collision Detected");
+              squaree.y -= 100;
+            } else {
+                // no collision
+                //square.graphics.beginFill("#FF0000");
+                console.log("No Collision");
+            }
+        }
 
-      
-      stage.update();
-}
-/*
-var startPos = 0,
-isReached = false;
-function keydown(event) {
-     keys[event.keyCode] = true;
-      if (keys[32]) { // KEY_LEFT
-   //console.log(createjs.Tween.get(play))
-   if(startPos >= -500){
-     startPos -= 30;
+        function keydown(event) {
+            keys[event.keyCode] = true;
+            if (keys[32]) { // KEY_LEFT
+                reach -= 50;
 
-       createjs.Tween.get(play, { override:true})
-        .to({ y: startPos }, 1000).to({ y: 50});
-    }else{
-       
-     
-     alert("You Won !!!");
-     window.location.reload();
-     //alert("You Won !!!");
-   }
- }
-}
-*/
-function keyup(event) {
-    delete keys[event.keyCode];
-
-}
-}
+                createjs.Tween.get(play, {
+                        override: true
+                    })
+                    .to({
+                        y: reach
+                    }, 500)
+                    .to({
+                        y: 50
+                    }, 1000).addEventListener("change", checkCollision);
+                console.log(play.y);
 
 
+                /*
+                       if (squaree.x < play.x + 40 &&
+                        squaree.x + 40 > play.x &&
+                        squaree.y < play.y + 40 &&
+                        40 + squaree.y > play.y) {
+                        // collision detected!
+                       console.log("game over");
+                       
+                        box2.addChild(squaree);
+                         squaree.graphics.beginFill("red");
+                           //movRectangle.x =0;
+                    } else {
+                        // no collision
+                        console.log("not done");
+                    }
+                    */
 
-// ========================== ------------------------------ ======================================
-            function handleImageLoad(event) {
-            var image = event.target;
-            var bitmap = new createjs.Bitmap(image);
-           cloud.addChild(bitmap);
+
+                if (play.y <= -350) {
+                    //play.y = reach;
+                    play.visible = false;
+                    stage.addChild(txt);
+                    console.log("you" + play.y);
+
+                    // alert(reach);
+                    //  window.location.reload();
+
+
+                }
+
+                //play.y += 5;
+
+                //console.log(play.y);
+                // .to({ y: 20 }, 1000, createjs.Ease.bounceOut);
+
+                //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
+                // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
+            }
+
+
+
             stage.update();
-       
+        }
+        /*
+        var startPos = 0,
+        isReached = false;
+        function keydown(event) {
+             keys[event.keyCode] = true;
+              if (keys[32]) { // KEY_LEFT
+           //console.log(createjs.Tween.get(play))
+           if(startPos >= -500){
+             startPos -= 30;
 
- }
+               createjs.Tween.get(play, { override:true})
+                .to({ y: startPos }, 1000).to({ y: 50});
+            }else{
+               
+             
+             alert("You Won !!!");
+             window.location.reload();
+             //alert("You Won !!!");
+           }
+         }
+        }
+        */
+        function keyup(event) {
+            delete keys[event.keyCode];
 
-	
-	
-	</script>
-	</head>
+        }
+    }
+
+
+
+    // ========================== ------------------------------ ======================================
+    function handleImageLoad(event) {
+        var image = event.target;
+        var bitmap = new createjs.Bitmap(image);
+        cloud.addChild(bitmap);
+        stage.update();
+
+
+    }
+    </script>
+</head>
+
 <body onload="init();">
-  <canvas id="canvas" width="800" height="1000"></canvas>
-
-
-<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
-<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+    <canvas id="canvas" width="800" height="1000"></canvas>
+    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
-</html>
-<!--http://developer.sonymobile.com/unlockbootloader/imei-verification/957cbaf2bf555b5d7c8db16b9c9c74da/ ============ for phone ===========-->
 
+</html>
+<!--http://developer.sonymobile.com/unlockbootloader/imei-verification/957cbaf2bf555b5d7c8db16b9c9c74da/ 
+
+
+http://indiegamr.com/easeljs-pixel-perfect-collision-detection-for-bitmaps-with-alpha-threshold/
+
+http://indiegamr.com/zerotoappstore/
+============ for bitmap ===========-->
