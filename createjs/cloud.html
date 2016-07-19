@@ -21,7 +21,7 @@
 
         var box2 = stage.addChild(new createjs.Container());
         box2.x = 300;
-        box2.y = 700;
+        box2.y = 1000;
         // text 
         var txt = new createjs.Text();
         txt.font = "bold 60px Dorsa";
@@ -49,12 +49,12 @@
         play = new createjs.Shape();
         squaree = new createjs.Shape();
 
-        play.graphics.beginFill("black").drawCircle(0, 0, 40);
+        play.graphics.beginFill("black").drawCircle(0, 0, 20);
         squaree.graphics.beginFill("blue").drawRect(0, 0, 200, 80);
         //movRectangle.x =0;
         // movRectangle.y =0;
         squaree.x = -200;
-        squaree.y = -200;
+        squaree.y = -500;
         box2.addChild(play);
         box2.addChild(squaree);
         this.document.onkeydown = keydown;
@@ -86,10 +86,10 @@
             })
             .to({
                 x: 200
-            }, 4000, createjs.Ease.getPowInOut(1))
+            }, 2000, createjs.Ease.getPowInOut(1))
             .to({
                 x: -200
-            }, 4000, createjs.Ease.getPowInOut(1));
+            }, 2000, createjs.Ease.getPowInOut(1));
 
 
         createjs.Ticker.setFPS(60);
@@ -106,9 +106,9 @@
 
         function checkCollision() {
             //square bounding box
-            if (squaree.x < play.x + 40 &&
+            if (squaree.x < play.x + 20 &&
                 squaree.x + 200 > play.x &&
-                squaree.y < play.y + 40 &&
+                squaree.y < play.y + 20 &&
                 80 + squaree.y > play.y) {
                 // collision detected!
                 //square.graphics.beginFill("#F4F4F4");
@@ -122,9 +122,9 @@ img.onload = function(event) {
     var data = {
         //framerate: 10,
         images: [img],
-        frames: {width:164, height:164, regX:200, regY:play.x, count:10},
+        frames: {width:164, height:164, regX:200, regY:(play.x + 150), count:10},
         animations: {
-            'explode': [0, 1000],
+            'explode': [0, 10000],
         }
     }
  
@@ -135,6 +135,8 @@ img.onload = function(event) {
  
     stage.addChild(animation);
     play.visible = false;
+    play.y = -500;
+    //img.visible = false;
               
                /*this is the code to change color-
                ===========
@@ -159,10 +161,10 @@ img.onload = function(event) {
                     })
                     .to({
                         y: reach
-                    }, 500)
+                    }, 400)
                     .to({
                         y: 50
-                    }, 1000).addEventListener("change", checkCollision);
+                    }, 400).addEventListener("change", checkCollision);
                 console.log(play.y);
 
 
@@ -184,7 +186,7 @@ img.onload = function(event) {
                     */
 
 
-                if (play.y <= -350) {
+                if (play.y <= -550) {
                     //play.y = reach;
                     play.visible = false;
                     stage.addChild(txt);
@@ -252,7 +254,7 @@ img.onload = function(event) {
 </head>
 
 <body onload="init();">
-    <canvas id="canvas" width="800" height="1000"></canvas>
+    <canvas id="canvas" width="800" height="1200"></canvas>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
