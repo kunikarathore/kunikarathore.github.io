@@ -49,7 +49,7 @@
         play = new createjs.Shape();
         squaree = new createjs.Shape();
 
-        play.graphics.beginFill("black").drawCircle(0, 0, 40);
+        play.graphics.beginFill("cyan").drawCircle(0, 0, 40);
         squaree.graphics.beginFill("blue").drawRect(0, 0, 200, 80);
         //movRectangle.x =0;
         // movRectangle.y =0;
@@ -102,6 +102,7 @@
 
         var reach = -10,
             isReached = false;
+            var bub = [];
 
         function checkCollision() {
             //square bounding box
@@ -112,9 +113,35 @@
                 // collision detected!
                 //square.graphics.beginFill("#F4F4F4");
           console.log("Collision Detected");
-             // alert("you loose");
+          bub.push(play.x);
+             //alert("you loose");
+
+var img = new Image();
+img.src = 'img/bubbles.PNG';
+img.onload = function(event) {
+    var data = {
+        //framerate: 10,
+        images: [img],
+        frames: {width:164, height:164, regX:200, regY:play.x, count:10},
+        animations: {
+            'explode': [0, 1000],
+        }
+    }
+ 
+    var spritesheet = new createjs.SpriteSheet(data);
+    var animation = new createjs.Sprite(spritesheet, 'explode');
+    animation.x = canvas.width/2;
+    animation.y = canvas.height/2;
+ 
+    stage.addChild(animation);
+    play.visible = false;
               
+               /*this is the code to change color-
+               ===========
                 play.graphics.beginFill("blue").drawCircle(0, 0, 40);
+                ===========
+               */}
+
             } else {
                 // no collision
                 //square.graphics.beginFill("#FF0000");
