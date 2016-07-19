@@ -151,11 +151,13 @@ img.onload = function(event) {
             }
         }
                 var down = 200;
+                var downh = 50;
         function keydown(event) {
             keys[event.keyCode] = true;
             if (keys[32]) { // KEY_LEFT
                 reach -= 50;
-                down   += 100;
+                downh -= 50;
+                //down   -= 100;
 
                 createjs.Tween.get(play, {
                         override: true
@@ -164,8 +166,8 @@ img.onload = function(event) {
                         y: reach
                     }, 400)
                     .to({
-                        y: 50
-                    }, down).addEventListener("change", checkCollision);
+                        y: downh
+                    }, 200).addEventListener("change", checkCollision);
                 console.log(down);
 
 
