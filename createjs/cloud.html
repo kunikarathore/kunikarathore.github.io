@@ -50,7 +50,7 @@
         squaree = new createjs.Shape();
 
         play.graphics.beginFill("black").drawCircle(0, 0, 40);
-        squaree.graphics.beginFill("blue").drawRect(0, 0, 80, 80);
+        squaree.graphics.beginFill("blue").drawRect(0, 0, 200, 80);
         //movRectangle.x =0;
         // movRectangle.y =0;
         squaree.x = -200;
@@ -106,13 +106,15 @@
         function checkCollision() {
             //square bounding box
             if (squaree.x < play.x + 40 &&
-                squaree.x + 80 > play.x &&
+                squaree.x + 200 > play.x &&
                 squaree.y < play.y + 40 &&
                 80 + squaree.y > play.y) {
                 // collision detected!
                 //square.graphics.beginFill("#F4F4F4");
           console.log("Collision Detected");
-              alert("you loose");
+             // alert("you loose");
+              
+                play.graphics.beginFill("blue").drawCircle(0, 0, 40);
             } else {
                 // no collision
                 //square.graphics.beginFill("#FF0000");
@@ -230,7 +232,6 @@
 
 </html>
 <!--http://developer.sonymobile.com/unlockbootloader/imei-verification/957cbaf2bf555b5d7c8db16b9c9c74da/ 
-
 
 http://indiegamr.com/easeljs-pixel-perfect-collision-detection-for-bitmaps-with-alpha-threshold/
 
