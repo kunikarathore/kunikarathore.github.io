@@ -20,15 +20,15 @@
         box.y = 400;
 
         var box2 = stage.addChild(new createjs.Container());
-        box2.x = 300;
-        box2.y = 1000;
+        box2.x = 50;
+        box2.y = 100;
         // text 
         var txt = new createjs.Text();
-        txt.font = "bold 60px Dorsa";
+        txt.font = "bold 15px Dorsa";
         txt.color = "black";
         txt.text = "you won!";
-        txt.x = 200;
-        txt.y = 100;
+        txt.x = 70;
+        txt.y = 40;
 
 
 
@@ -49,12 +49,12 @@
         play = new createjs.Shape();
         squaree = new createjs.Shape();
 
-        play.graphics.beginFill("black").drawCircle(0, 0, 20);
-        squaree.graphics.beginFill("blue").drawRect(0, 0, 200, 80);
-        //movRectangle.x =0;
-        // movRectangle.y =0;
+        play.graphics.beginFill("black").drawCircle(0, 0, 5);
+        squaree.graphics.beginFill("blue").drawRect(0, 0, 50, 10);
+        play.x =30;
+        play.y =100;
         squaree.x = -200;
-        squaree.y = -500;
+        squaree.y = 0;
         box2.addChild(play);
         box2.addChild(squaree);
         this.document.onkeydown = keydown;
@@ -97,19 +97,19 @@
         stage.update();
         // Image of cloud
         var image = new Image();
-        image.src = "img/cloud.jpg";
+        image.src = "img/cloud2.jpg";
         image.onload = handleImageLoad;
 
-        var reach = -10,
+       var reach = 90,
             isReached = false;
             var bub = [];
 
         function checkCollision() {
             //square bounding box
-            if (squaree.x < play.x + 20 &&
-                squaree.x + 200 > play.x &&
-                squaree.y < play.y + 20 &&
-                80 + squaree.y > play.y) {
+            if (squaree.x < play.x + 5 &&
+                squaree.x + 50 > play.x &&
+                squaree.y < play.y + 5 &&
+                10 + squaree.y > play.y) {
                 // collision detected!
                 //square.graphics.beginFill("#F4F4F4");
           console.log("Collision Detected");
@@ -117,12 +117,12 @@
              //alert("you loose");
 
 var img = new Image();
-img.src = 'img/bubbles.png';
+img.src = 'img/bubbles2.png';
 img.onload = function(event) {
     var data = {
-        //framerate: 10,
+        framerate: 10,
         images: [img],
-        frames: {width:164, height:164, regX:200, regY:(play.x + 150), count:10},
+        frames: {width:64, height:64, regX:132, regY:12},
         animations: {
             'explode': [0, 10000],
         }
@@ -130,8 +130,8 @@ img.onload = function(event) {
  
     var spritesheet = new createjs.SpriteSheet(data);
     var animation = new createjs.Sprite(spritesheet, 'explode');
-    animation.x = canvas.width/2;
-    animation.y = canvas.height/2;
+    animation.x = play.x + 150;
+    animation.y = play.y + 80;
  
     stage.addChild(animation);
     play.visible = false;
@@ -150,13 +150,40 @@ img.onload = function(event) {
                 console.log("No Collision");
             }
         }
-                var down = 200;
-                var downh = 50;
+                
+                var downh = 100;
         function keydown(event) {
             keys[event.keyCode] = true;
             if (keys[32]) { // KEY_LEFT
-                reach -= 50;
-                downh -= 50;
+               createjs.Tween.get(play, {
+                        override: true
+                    })
+                    .to({
+                        y: 70
+                    }, 400, createjs.Ease.quadOut)
+                    .to({
+                        y: downh
+                    }, 500, createjs.Ease.quadIn).addEventListener("change", checkCollision);
+      //  function(){}
+                if(play.y === 100){
+
+
+createjs.Tween.get(play, {
+                        override: true
+                    })
+                    .to({
+                        y: 70
+                    }, 400, createjs.Ease.quadOut)
+                    .to({
+                        y: 100
+                    }, 500, createjs.Ease.quadIn).addEventListener("change", checkCollision);
+                console.log(play.y);
+
+
+                }
+                else if(play.y < 100){
+
+                   reach -= 20;
                 //down   -= 100;
 
                 createjs.Tween.get(play, {
@@ -166,30 +193,15 @@ img.onload = function(event) {
                         y: reach
                     }, 400, createjs.Ease.quadOut)
                     .to({
-                        y: 50
+                        y: 100
                     }, 500, createjs.Ease.quadIn).addEventListener("change", checkCollision);
-                console.log(down);
+                console.log(play.y);
 
 
-                /*
-                       if (squaree.x < play.x + 40 &&
-                        squaree.x + 40 > play.x &&
-                        squaree.y < play.y + 40 &&
-                        40 + squaree.y > play.y) {
-                        // collision detected!
-                       console.log("game over");
-                       
-                        box2.addChild(squaree);
-                         squaree.graphics.beginFill("red");
-                           //movRectangle.x =0;
-                    } else {
-                        // no collision
-                        console.log("not done");
-                    }
-                    */
+               
 
 
-                if (play.y <= -650) {
+                if (play.y <= -50) {
                     //play.y = reach;
                     play.visible = false;
                     stage.addChild(txt);
@@ -209,11 +221,45 @@ img.onload = function(event) {
                 //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
                 // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
             }
+                 }
 
 
 
             stage.update();
-        }
+        } 
+
+                /*
+                       if (squaree.x < play.x + 40 &&
+                        squaree.x + 40 > play.x &&
+                        squaree.y < play.y + 40 &&
+                        40 + squaree.y > play.y) {
+                        // collision detected!
+                       console.log("game over");
+                       
+                        box2.addChild(squaree);
+                         squaree.graphics.beginFill("red");
+                           //movRectangle.x =0;
+                    } else {
+                        // no collision
+                        console.log("not done");
+                    }
+                    */
+
+
+           
+                    //  window.location.reload();
+
+
+                
+
+                //play.y += 5;
+
+                //console.log(play.y);
+                // .to({ y: 20 }, 1000, createjs.Ease.bounceOut);
+
+                //.to({ y: 200 }, 2000, createjs.Ease.bounceOut);
+                // .to({ y: 00 }, 2000, createjs.Ease.bounceOut);
+          
         /*
         var startPos = 0,
         isReached = false;
@@ -240,7 +286,7 @@ img.onload = function(event) {
             delete keys[event.keyCode];
 
         }
-    }
+    
 
 
 
@@ -253,11 +299,12 @@ img.onload = function(event) {
 
 
     }
+  }
     </script>
 </head>
 
 <body onload="init();">
-    <canvas id="canvas" width="800" height="1200"></canvas>
+    <canvas id="canvas" width="500" height="500"></canvas>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
@@ -268,4 +315,5 @@ img.onload = function(event) {
 http://indiegamr.com/easeljs-pixel-perfect-collision-detection-for-bitmaps-with-alpha-threshold/
 
 http://indiegamr.com/zerotoappstore/
+
 ============ for bitmap ===========-->
