@@ -164,10 +164,10 @@ img.onload = function(event) {
                     })
                     .to({
                         y: reach
-                    }, 400)
+                    }, 400, createjs.Ease.quadOut)
                     .to({
-                        y: downh
-                    }, 200).addEventListener("change", checkCollision);
+                        y: 50
+                    }, 500, createjs.Ease.quadIn).addEventListener("change", checkCollision);
                 console.log(down);
 
 
