@@ -29,8 +29,14 @@
         txt.text = "you won!";
         txt.x = 150;
         txt.y = 90;
-
-
+        
+        var txt1 = new createjs.Text();
+        txt1.font = "bold 25px Dorsa";
+        txt1.color = "black";
+        txt1.text = "you loose!";
+        txt1.x = 100;
+        txt1.y = 90;
+        txt1.alpha = 0.2;
 
 
         var movRectangle2 = new createjs.Shape();
@@ -105,7 +111,8 @@
 
 
 
-
+var shp1 = new createjs.Shape();
+        shp1.graphics.beginFill("black").drawRect(0, 0, 40, 40);
 
 
         var reach = 90
@@ -147,7 +154,7 @@
                     animation.y = play.y + 300;
 
                     stage.addChild(animation);
-                    imageReplay("img/restart.png");
+                    
                     play.visible = false;
                     play.y = 50;
                     //img.visible = false;
@@ -158,7 +165,10 @@
                      ===========
                     */
                 }
-
+                stage.addChild(txt1);
+                txt.visible = false;
+imageReplay(txt1);
+//imageReplay(shp1);
             } else {
                 // no collision
                 //square.graphics.beginFill("#FF0000");
@@ -170,22 +180,28 @@
                       // function for replay image
 
 
-                        function imageReplay(image){
-                         var name = new Image();
 
-                        name.src = image;
+                        function imageReplay(shp) {
 
-                        name.onload = handleReplayLoad;
+                            
+                            shp.x = 120;
+                            shp.y =220;
+                            stage.addChild(shp);
+                            createjs.Tween.get(shp)
+                                    .to({alpha:1}, 1500)
+        .to({text:"you loose!"}, 800)
+        .to({y:380}, 2000, createjs.Ease.bounceOut)
+          .to({text:"click & replay"}, 1000)
+        .to({rotation:360}, 2000)
+         .wait(1000);
+          //.to({alpha:0}, 1000)
+      
+        
+      
+        //.call(alert, ["Done animating!"], window);
 
-                        function handleReplayLoad(event) {
-                            var name = event.target;
-                            var bitmap = new createjs.Bitmap(name);
-                            bitmap.x = 150;
-                            bitmap.y = 400;
-                            stage.addChild(bitmap);
-                            createjs.Tween.get(bitmap)
-                            .wait(1000)
-                            .to({rotation:-360}, 8000);
+
+
                             //.to({rotation:40}, 1000);
 
                             stage.addEventListener("stagemousedown", handleClick);
@@ -196,7 +212,38 @@
                             stage.update();
 
                         }
+
+                        function txtReplay(shp) {
+
+                            
+                        
+                           
+                            createjs.Tween.get(shp)
+                                    .to({alpha:1}, 1500)
+        
+        .to({y:380}, 2000, createjs.Ease.bounceOut)
+          .to({text:"click & replay"}, 1000)
+        .to({rotation:360}, 2000)
+         .wait(1000);
+          //.to({alpha:0}, 1000)
+      
+        
+      
+        //.call(alert, ["Done animating!"], window);
+
+
+
+                            //.to({rotation:40}, 1000);
+
+                            stage.addEventListener("stagemousedown", handleClick);
+
+                            function handleClick(event) {
+                                window.location.reload();
+                            }
+                            stage.update();
+
                         }
+                        
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -246,10 +293,12 @@
                         //play.y = reach;
                         var replay;
                         play.visible = false;
+                        txt1.visible = true;
                         stage.addChild(txt);
                         console.log("you" + play.y);
+                       txtReplay(txt);
                         //replay.crossOrigin = "Anonymous"; 
-                         imageReplay("img/restart.png");
+                         //imageReplay("img/restart.png");
                         // alert(reach);
                         //  window.location.reload();
 
