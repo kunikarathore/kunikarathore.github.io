@@ -184,8 +184,9 @@
                             bitmap.y = 400;
                             stage.addChild(bitmap);
                             createjs.Tween.get(bitmap)
-                            .to({rotation:-360}, 500)
-                            .to({rotation:360}, 500);
+                            .wait(1000)
+                            .to({rotation:-360}, 8000);
+                            //.to({rotation:40}, 1000);
 
                             stage.addEventListener("stagemousedown", handleClick);
 
@@ -335,10 +336,9 @@
         // ========================== ------------------------------ ======================================
         function handleImageLoad(event) {
             var image = event.target;
-            var bitmap = new createjs.Bitmap(image);
-            cloud.addChild(bitmap);
+            var bitmap1 = new createjs.Bitmap(image);
+            cloud.addChild(bitmap1);
             stage.update();
-
 
         }
 
