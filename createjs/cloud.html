@@ -56,6 +56,7 @@
         squaree.x = -200;
         squaree.y = -80;
         box2.addChild(play);
+
         box2.addChild(squaree);
         this.document.onkeydown = keydown;
         this.document.onkeyup = keyup;
@@ -180,8 +181,12 @@
                             var name = event.target;
                             var bitmap = new createjs.Bitmap(name);
                             bitmap.x = 150;
-                            bitmap.y = 300;
+                            bitmap.y = 400;
                             stage.addChild(bitmap);
+                            createjs.Tween.get(bitmap)
+                            .to({rotation:-360}, 500)
+                            .to({rotation:360}, 500);
+
                             stage.addEventListener("stagemousedown", handleClick);
 
                             function handleClick(event) {
