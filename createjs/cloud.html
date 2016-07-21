@@ -100,9 +100,16 @@
         image.src = "img/cloud2.jpg";
         image.onload = handleImageLoad;
 
-        var reach = 90,
-            isReached = false;
+
+
+
+
+
+
+
+        var reach = 90
         var bub = [];
+
 
         function checkCollision() {
             //square bounding box
@@ -139,6 +146,7 @@
                     animation.y = play.y + 300;
 
                     stage.addChild(animation);
+                    imageReplay("img/restart.png");
                     play.visible = false;
                     play.y = 50;
                     //img.visible = false;
@@ -156,6 +164,35 @@
                 console.log("No Collision");
             }
         }
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+                      // function for replay image
+
+
+                        function imageReplay(image){
+                         var name = new Image();
+
+                        name.src = image;
+
+                        name.onload = handleReplayLoad;
+
+                        function handleReplayLoad(event) {
+                            var name = event.target;
+                            var bitmap = new createjs.Bitmap(name);
+                            bitmap.x = 150;
+                            bitmap.y = 300;
+                            stage.addChild(bitmap);
+                            stage.addEventListener("stagemousedown", handleClick);
+
+                            function handleClick(event) {
+                                window.location.reload();
+                            }
+                            stage.update();
+
+                        }
+                        }
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
         var downh = 100;
 
@@ -201,10 +238,12 @@
 
                     if (play.y <= -150) {
                         //play.y = reach;
+                        var replay;
                         play.visible = false;
                         stage.addChild(txt);
                         console.log("you" + play.y);
-
+                        //replay.crossOrigin = "Anonymous"; 
+                         imageReplay("img/restart.png");
                         // alert(reach);
                         //  window.location.reload();
 
@@ -297,6 +336,12 @@
 
 
         }
+
+
+
+
+
+
     }
     </script>
 </head>
