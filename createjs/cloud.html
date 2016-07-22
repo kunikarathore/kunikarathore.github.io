@@ -4,12 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>cloud</title>
+        <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
     var stage, movRectangle, play, cloud, squaree;
     var keys = {};
-
+ var soundID = "Thunder";
     function init() {
+
         stage = new createjs.Stage("canvas");
+        createjs.Sound.registerSound("bounce.ogg", soundID);
         // container for cloud
         cloud = stage.addChild(new createjs.Container());
         cloud.x = 50;
@@ -29,7 +32,7 @@
         txt.text = "you won!";
         txt.x = 150;
         txt.y = 90;
-        
+
         var txt1 = new createjs.Text();
         txt1.font = "bold 25px Dorsa";
         txt1.color = "black";
@@ -111,7 +114,7 @@
 
 
 
-var shp1 = new createjs.Shape();
+        var shp1 = new createjs.Shape();
         shp1.graphics.beginFill("black").drawRect(0, 0, 40, 40);
 
 
@@ -154,7 +157,7 @@ var shp1 = new createjs.Shape();
                     animation.y = play.y + 300;
 
                     stage.addChild(animation);
-                    
+
                     play.visible = false;
                     play.y = 50;
                     //img.visible = false;
@@ -165,93 +168,116 @@ var shp1 = new createjs.Shape();
                      ===========
                     */
                 }
+                soundID = false;
                 stage.addChild(txt1);
                 txt.visible = false;
-imageReplay(txt1);
-//imageReplay(shp1);
+                imageReplay(txt1);
+                //imageReplay(shp1);
             } else {
                 // no collision
                 //square.graphics.beginFill("#FF0000");
                 console.log("No Collision");
             }
         }
-/////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////
 
-                      // function for replay image
-
-
-
-                        function imageReplay(shp) {
-
-                            
-                            shp.x = 120;
-                            shp.y =220;
-                            stage.addChild(shp);
-                            createjs.Tween.get(shp)
-                                    .to({alpha:1}, 1500)
-        .to({text:"you loose!"}, 800)
-        .to({y:380}, 2000, createjs.Ease.bounceOut)
-          .to({text:"click & replay"}, 1000)
-        .to({rotation:360}, 2000)
-         .wait(1000);
-          //.to({alpha:0}, 1000)
-      
-        
-      
-        //.call(alert, ["Done animating!"], window);
+        // function for replay image
 
 
 
-                            //.to({rotation:40}, 1000);
+        function imageReplay(shp) {
 
-                            stage.addEventListener("stagemousedown", handleClick);
 
-                            function handleClick(event) {
-                                window.location.reload();
-                            }
-                            stage.update();
-
-                        }
-
-                        function txtReplay(shp) {
-
-                            
-                        
-                           
-                            createjs.Tween.get(shp)
-                                    .to({alpha:1}, 1500)
-        
-        .to({y:380}, 2000, createjs.Ease.bounceOut)
-          .to({text:"click & replay"}, 1000)
-        .to({rotation:360}, 2000)
-         .wait(1000);
-          //.to({alpha:0}, 1000)
-      
-        
-      
-        //.call(alert, ["Done animating!"], window);
+            shp.x = 120;
+            shp.y = 220;
+            stage.addChild(shp);
+            createjs.Tween.get(shp)
+                .to({
+                    alpha: 1
+                }, 1500)
+                .to({
+                    text: "you loose!"
+                }, 800)
+                .to({
+                    y: 380
+                }, 2000, createjs.Ease.bounceOut)
+                .to({
+                    text: "click & replay"
+                }, 1000)
+                .to({
+                    rotation: 360
+                }, 2000)
+                .wait(1000);
+            //.to({alpha:0}, 1000)
 
 
 
-                            //.to({rotation:40}, 1000);
+            //.call(alert, ["Done animating!"], window);
 
-                            stage.addEventListener("stagemousedown", handleClick);
 
-                            function handleClick(event) {
-                                window.location.reload();
-                            }
-                            stage.update();
 
-                        }
-                        
+            //.to({rotation:40}, 1000);
 
-////////////////////////////////////////////////////////////////////////////////////////////
+            stage.addEventListener("stagemousedown", handleClick);
+
+            function handleClick(event) {
+                window.location.reload();
+            }
+            stage.update();
+
+        }
+
+        function txtReplay(shp) {
+
+
+
+
+            createjs.Tween.get(shp)
+                .to({
+                    alpha: 1
+                }, 1500)
+
+            .to({
+                    y: 380
+                }, 2000, createjs.Ease.bounceOut)
+                .to({
+                    text: "click & replay"
+                }, 1000)
+                .to({
+                    rotation: 360
+                }, 2000)
+                .wait(1000);
+            //.to({alpha:0}, 1000)
+
+
+
+            //.call(alert, ["Done animating!"], window);
+
+
+
+            //.to({rotation:40}, 1000);
+
+            stage.addEventListener("stagemousedown", handleClick);
+
+            function handleClick(event) {
+                window.location.reload();
+            }
+            stage.update();
+
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         var downh = 100;
 
         function keydown(event) {
             keys[event.keyCode] = true;
-            if (keys[32]) { // KEY_LEFT
+            if (keys[32]) { // space bar
+              //bounce sound
+
+ 
+playSound();
 
                 //  function(){}
                 if (play.y === 180) {
@@ -296,9 +322,15 @@ imageReplay(txt1);
                         txt1.visible = true;
                         stage.addChild(txt);
                         console.log("you" + play.y);
-                       txtReplay(txt);
+                        txtReplay(txt);
+                        soundID = false;
+                         keys[event.keyCode] = false;
+                         //play.x= false;
+                       
+
+
                         //replay.crossOrigin = "Anonymous"; 
-                         //imageReplay("img/restart.png");
+                        //imageReplay("img/restart.png");
                         // alert(reach);
                         //  window.location.reload();
 
@@ -397,13 +429,19 @@ imageReplay(txt1);
 
 
     }
+     function playSound () {
+        createjs.Sound.play(soundID);
+      }
     </script>
 </head>
 
 <body onload="init();">
     <canvas id="canvas" width="500" height="500"></canvas>
+
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+            <script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> 
 </body>
 
 </html>
