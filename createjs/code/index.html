@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>cloud</title>
+        <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script>
+    var stage;
+    function init(){
+    	stage = new createjs.Stage("canvas");
+    	// ================= container for the background and pokemon ===============
+           var background = stage.addChild(new createjs.Container());
+
+
+    	// ================= container for the tomato ===============
+    	   var tomato = stage.addChild(new createjs.Container());
+    	   tomato.x = 200;
+    	   tomato.y = 400;
+
+
+
+    	/// ================== function to add image ================================
+
+       function addImage(imagess, container){
+       	var image = new Image();
+        image.src = imagess;
+        image.onload = imageHandler;
+
+                function imageHandler(event) {
+                var image = event.target;
+                var bitmap = new createjs.Bitmap(image);
+                container.addChild(bitmap);
+                stage.update();
+
+                }
+       }
+
+
+//          ================= this is the background image of grass==================
+     addImage("background1.jpg", background);  
+
+//          ================= this is the pokemon image =============================  
+     addImage("pika.png", background);   
+
+//          ================= this is the tomato image =============================  
+     addImage("tomato.png", tomato);   
+
+    }
+
+    </script>
+</head>
+
+<body onload="init();">
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <!--<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+          <script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> -->
+   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+           
+</body>
+
+</html>
