@@ -3,27 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>cloud</title>
+    <title>Pokemon Go</title>
         <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
     var stage;
     function init(){
-    	stage = new createjs.Stage("canvas");
-    	// ================= container for the background and pokemon ===============
+        stage = new createjs.Stage("canvas");
+        // ================= container for the background and pokemon ===============
            var background = stage.addChild(new createjs.Container());
 
 
-    	// ================= container for the tomato ===============
-    	   var tomato = stage.addChild(new createjs.Container());
-    	   tomato.x = 200;
-    	   tomato.y = 400;
+        // ================= container for the tomato ===============
+           var tomato = stage.addChild(new createjs.Container());
+           tomato.x = 200;
+           tomato.y = 400;
 
 
 
-    	/// ================== function to add image ================================
+        /// ================== function to add image ================================
 
        function addImage(imagess, container){
-       	var image = new Image();
+        var image = new Image();
         image.src = imagess;
         image.onload = imageHandler;
 
@@ -44,7 +44,7 @@
      addImage("pika.png", background);   
 
 //          ================= this is the tomato image =============================  
-     addImage("tomato.png", tomato);   
+     addImage("tomato1.png", tomato);   
 
     }
 
