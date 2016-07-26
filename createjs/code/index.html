@@ -4,119 +4,174 @@
 <head>
     <meta charset="utf-8">
     <title>Pokemon Go</title>
-        <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
     var stage, bitmap;
     var keys = {};
-    function init(){
+
+    function init() {
         stage = new createjs.Stage("canvas");
         // ================= container for the background and pokemon ===============
-           var background = stage.addChild(new createjs.Container());
+        var background = stage.addChild(new createjs.Container());
 
 
         // ================= container for the tomato ===============
-           var tomato = stage.addChild(new createjs.Container());
-           tomato.x = 200;
-           tomato.y = 400;
-           var tomato2 = stage.addChild(new createjs.Container());
-            tomato.x = 200;
-           tomato.y = 400;
-           var tomato3 = stage.addChild(new createjs.Container());
+        var tomato = stage.addChild(new createjs.Container());
+        tomato.x = 200;
+        tomato.y = 400;
+        var tomato2 = stage.addChild(new createjs.Container());
+        tomato2.x = 200;
+        tomato2.y = 400;
+        var tomato3 = stage.addChild(new createjs.Container());
 
 
 
         /// ================== function to add image ================================
 
-       function addImage(imagess, container){
-        var image = new Image();
-        image.src = imagess;
-        image.onload = imageHandler;
-        //image.name = imgName;
+        function addImage(imagess, container) {
+            var image = new Image();
+            image.src = imagess;
+            image.onload = imageHandler;
+            //image.name = imgName;
 
-                function imageHandler(event) {
+            function imageHandler(event) {
                 var image = event.target;
                 var bitmap = new createjs.Bitmap(image);
                 container.addChild(bitmap);
                 stage.update();
 
-                }
-                
-       }
-//====================
+            }
+
+        }
+        //====================
         var image = new Image();
         image.src = "tomato1.png";
         image.onload = imageHandler;
         //image.name = imgName;
 
-                function imageHandler(event) {
-                var image = event.target;
-                bitmap = new createjs.Bitmap(image);
-                tomato.addChild(bitmap);
-                stage.update();
+        function imageHandler(event) {
+            var image = event.target;
+            bitmap = new createjs.Bitmap(image);
+            tomato.addChild(bitmap);
+            stage.update();
 
-                }
-                //=====================================================
-            this.document.onkeydown = keydown;
-            this.document.onkeyup = keyup;
-//          ================= this is the background image of grass==================
-     addImage("background1.jpg", background);  
+        }
+        //=====================================================
+        var image1 = new Image();
+        image1.src = "t1.png";
+        image1.onload = imageHandler1;
+        //image.name = imgName;
 
-//          ================= this is the pokemon image =============================  
-     addImage("pika.png", background);   
+        function imageHandler1(event) {
+            var image1 = event.target;
+            bitmap1 = new createjs.Bitmap(image1);
 
-//          ================= this is the tomato image =============================  
-     //addImage("tomato1.png", tomato); 
-     //addImage("t1.png", tomato2); 
-     //addImage("t2.png", tomato3); 
-     //tomato2.alpha = 0;
-     //tomato3.alpha = 0;
+            stage.update();
 
-//   function for movement of tomato
+        }
+        //=============================================================
+        var image2 = new Image();
+        image2.src = "t2.png";
+        image2.onload = imageHandler2;
+        //image.name = imgName;
+
+        function imageHandler2(event) {
+            var image2 = event.target;
+            bitmap2 = new createjs.Bitmap(image2);
+
+            stage.update();
+
+        }
+        //=====================================================
+        this.document.onkeydown = keydown;
+        this.document.onkeyup = keyup;
+        //          ================= this is the background image of grass==================
+        addImage("background1.jpg", background);
+
+        //          ================= this is the pokemon image =============================  
+        addImage("pika.png", background);
+
+        //          ================= this is the tomato image =============================  
+        //addImage("tomato1.png", tomato); 
+        //addImage("t1.png", tomato2); 
+        //addImage("t2.png", tomato3); 
+        //tomato2.alpha = 0;
+        //tomato3.alpha = 0;
+
+        //   function for movement of tomato
+        function rem() {
+            bitmap.visible = false;
+        }
+
+        function rem2() {
+            bitmap1.visible = false;
+        }
+
+        function rem3() {
+            bitmap2.visible = false;
+        }
+
+        function half() {
+            createjs.Tween.get(bitmap1)
+                .to({
+                    y: -300
+                }, 50);
+            createjs.Tween.get(bitmap2)
+                .to({
+                    y: -300
+                }, 50);
+            tomato2.addChild(bitmap1);
+            createjs.Tween.get(bitmap1).wait(1000).call(rem2);
+            tomato2.addChild(bitmap2);
+            createjs.Tween.get(bitmap2).wait(1500).call(rem3);
+
+        }
+
+        function mov() {
+            createjs.Tween.get(bitmap)
+                .to({
+                    y: -300
+                }, 50).wait(500).call(rem);
+            half();
 
 
+        }
 
-                               
-     function keydown(event) {
+
+        function keydown(event) {
             keys[event.keyCode] = true;
 
-             if (keys[32]) {  // spacebar
-
-                                  createjs.Tween.get(bitmap)
-                                    .to({
-                                        y: -300
-                                    }, 110);
-                                    
-                                   
-
-                               
-                                  
-                                     }
-                                     stage.update();
-                                     //window.location.reload;
-                                    //stage.update();
-      }
+            if (keys[32]) { // spacebar
 
 
-                                function keyup(event) {
-                                    delete keys[event.keyCode];
 
-                             }
+                mov();
 
-       
-       
- 
+            }
+
+            stage.update();
+            //window.location.reload;
+            //stage.update();
+        }
+
+
+        function keyup(event) {
+            delete keys[event.keyCode];
+
+        }
+
+
+
+
     }
-
     </script>
 </head>
 
 <body onload="init();">
     <canvas id="canvas" width="500" height="500"></canvas>
-
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
     <!--<script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> -->
-   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-           
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
 
 </html>
