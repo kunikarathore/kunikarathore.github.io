@@ -9,7 +9,7 @@
           var stage;
 
         function init() {
-            stage = new createjs.Stage("myCanvas");
+              stage = new createjs.Stage("myCanvas");
              var container = new createjs.Container();
             var image = new Image();
             image.src = "tomato.png";
@@ -19,12 +19,16 @@
             var image = event.target;
             var bitmap = new createjs.Bitmap(image);
             container.addChild(bitmap);
+            container.x = 125;
+            container.y = 150;
              container.scaleX = container.scaleY = 0.5;
+            // container.visible = false;
             stage.update();
         }
             stage.addChild(container);
 
-            createjs.Tween.get(container).wait(1000).to({x:25, scaleX:0.5, scaleY:0.5}).to({x:125, scaleX:1, scaleY:1}, 8000, createjs.Ease.bounceOut);
+            createjs.Tween.get(container).wait(1000).to({x: 125, y: 420, scaleX:0.5, scaleY:0.5}).to({x: 125,y: 150, scaleX:1 *2, scaleY:1 *2}, 4000, createjs.Ease.quadOut)
+            .to({x: 125,y: 210, scaleX:0.5, scaleY:0.5}, 4000, createjs.Ease.quadOut);
              createjs.Ticker.setFPS(60);
         createjs.Ticker.addEventListener("tick", stage);
         }
