@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon Go</title>
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script>
+          var stage;
+
+        function init() {
+            stage = new createjs.Stage("myCanvas");
+             var container = new createjs.Container();
+            var image = new Image();
+            image.src = "tomato.png";
+            image.onload = handleImageLoad;
+
+        function handleImageLoad(event) {
+            var image = event.target;
+            var bitmap = new createjs.Bitmap(image);
+            container.addChild(bitmap);
+             container.scaleX = container.scaleY = 0.5;
+            stage.update();
+        }
+            stage.addChild(container);
+
+            createjs.Tween.get(container).wait(1000).to({x:25, scaleX:0.5, scaleY:0.5}).to({x:125, scaleX:1, scaleY:1}, 8000, createjs.Ease.bounceOut);
+             createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener("tick", stage);
+        }
+
+
+
+    </script>
+</head>
+
+<body onload="init();">
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <!--<script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> -->
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+
+</html>
