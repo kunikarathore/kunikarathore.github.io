@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon Go</title>
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script>
+    var stage, container, bg;
+    var keys = {};
+
+    function init() {
+    	// =================== STAGE ==========================
+        stage = new createjs.Stage("myCanvas");
+        
+                // ===========Container FOR bg ====================
+        bg = new createjs.Container();
+
+
+            // ===========adding a background =====================
+        var image1 = new Image();
+        image1.src = "background1.jpg";
+        image1.onload = handleBgLoad;
+
+        function handleBgLoad(event) {
+            var image1 = event.target;
+            var bitmap1 = new createjs.Bitmap(image1);
+            bg.addChild(bitmap1);
+           
+
+            stage.update();
+        }
+        
+        stage.addChild(bg);
+    }
+
+    </script>
+</head>
+
+<body onload="init();">
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <!--<script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> -->
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+
+</html>

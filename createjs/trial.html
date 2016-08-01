@@ -6,34 +6,117 @@
     <title>Pokemon Go</title>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
-          var stage;
+    var stage, tomato, bg, pika;
+    var keys = {};
 
-        function init() {
-              stage = new createjs.Stage("myCanvas");
-             var container = new createjs.Container();
-            var image = new Image();
-            image.src = "tomato.png";
-            image.onload = handleImageLoad;
+    function init() {
+    	// =================== STAGE ==========================
+        stage = new createjs.Stage("myCanvas");
+        // ===========adding a background =====================
+        var image1 = new Image();
+        image1.src = "background1.jpg";
+        image1.onload = handleBgLoad;
 
-        function handleImageLoad(event) {
+        function handleBgLoad(event) {
+            var image1 = event.target;
+            var bitmap1 = new createjs.Bitmap(image1);
+            bg.addChild(bitmap1);
+           
+
+            stage.update();
+ }
+
+        // ===========Container FOR tomato ====================
+        tomato = new createjs.Container();
+
+        // ===========Container FOR bg ====================
+        bg = new createjs.Container();
+
+         // ===========Container FOR bg ====================
+        pika = new createjs.Container();
+
+        
+
+        // ===========adding image of tomato ==================
+        var image = new Image();
+        image.src = "tomato.png";
+        image.onload = handleImageLoad;
+
+           function handleImageLoad(event) {
             var image = event.target;
             var bitmap = new createjs.Bitmap(image);
-            container.addChild(bitmap);
-            container.x = 125;
-            container.y = 150;
-             container.scaleX = container.scaleY = 0.5;
-            // container.visible = false;
+            tomato.addChild(bitmap);
+            tomato.x = 225;
+            tomato.y = 450;
+            tomato.scaleX = tomato.scaleY = 0.5;
+
             stage.update();
         }
-            stage.addChild(container);
+        
+        // ===========adding image of pikachu ==================
+        var image2 = new Image();
+        image2.src = "pikachu.png";
+        image2.onload = handlePikaLoad;
 
-            createjs.Tween.get(container).wait(1000).to({x: 125, y: 420, scaleX:0.5, scaleY:0.5}).to({x: 125,y: 150, scaleX:1 *2, scaleY:1 *2}, 4000, createjs.Ease.quadOut)
-            .to({x: 125,y: 210, scaleX:0.5, scaleY:0.5}, 4000, createjs.Ease.quadOut);
-             createjs.Ticker.setFPS(60);
-        createjs.Ticker.addEventListener("tick", stage);
+           function handlePikaLoad(event) {
+            var image2 = event.target;
+            var bitmap2 = new createjs.Bitmap(image2);
+            pika.addChild(bitmap2);
+
+            stage.update();
+        }
+        
+        //============= on press of space bar ==================
+        this.document.onkeydown = keydown;
+        this.document.onkeyup = keyup;
+        //====================================================
+        
+        stage.addChild(bg);
+        stage.addChild(pika);
+        stage.addChild(tomato);
+        stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
+
+        //====================================================================================
+           // =============== function called after pressing of space bar ====================
+        //====================================================================================
+        function keydown(event) {
+            keys[event.keyCode] = true;
+
+            if (keys[32]) {
+
+         //=================== Tween for tomato (movement) ===================================
+                createjs.Tween.get(tomato).wait(1000).to({
+                        x: 225,
+                        y: 450,
+                        scaleX: 0.5,
+                        scaleY: 0.5
+                    }).to({
+                        x: 200,
+                        y: 250,
+                        scaleX: 1 * 2,
+                        scaleY: 1 * 2
+                    }, 4000, createjs.Ease.quadOut)
+                    .to({
+                        x: 230,
+                        y: 260,
+                        scaleX: 0.5,
+                        scaleY: 0.5
+                    }, 4000, createjs.Ease.quadOut);
+                createjs.Ticker.setFPS(60);
+                createjs.Ticker.addEventListener("tick", stage);
+
+            }
+
+
+            stage.update();
         }
 
+        function keyup(event) {
 
+            delete keys[event.keyCode];
+        }
+
+    }
 
     </script>
 </head>
