@@ -48,7 +48,7 @@
             tomato.addChild(bitmap);
             tomato.x = 225;
             tomato.y = 450;
-            tomato.scaleX = tomato.scaleY = 0.5;
+            tomato.scaleX = tomato.scaleY = 1;
 
             stage.update();
         }
@@ -88,20 +88,20 @@
                 createjs.Tween.get(tomato).wait(1000).to({
                         x: 225,
                         y: 450,
-                        scaleX: 0.5,
-                        scaleY: 0.5
+                        scaleX: 1,
+                        scaleY: 1
                     }).to({
                         x: 200,
-                        y: 250,
+                        y: 150,
                         scaleX: 1 * 2,
                         scaleY: 1 * 2
-                    }, 4000, createjs.Ease.quadOut)
+                    }, 2000, createjs.Ease.quadOut)
                     .to({
-                        x: 230,
-                        y: 260,
-                        scaleX: 0.5,
-                        scaleY: 0.5
-                    }, 4000, createjs.Ease.quadOut);
+                        x: 245,
+                        y: 275,
+                        scaleX: 0,
+                        scaleY: 0
+                    }, 2000, createjs.Ease.quadOut);
                 createjs.Ticker.setFPS(60);
                 createjs.Ticker.addEventListener("tick", stage);
 
