@@ -136,7 +136,8 @@
         // function to close the mouth of pikachu
         function stop(){
         	pikachu.gotoAndPlay("stop");
-        	//stage.addChild(cutout);
+        	stage.addChild(cutout);
+        	cutout.alpha = 1;
         	
         }
         // comparision of time 
@@ -185,6 +186,10 @@
                         scaleX: 0,
                         scaleY: 0
                     }, 1000, createjs.Ease.quadOut).call(stop);
+
+                    createjs.Tween.get(cutout).to({
+                        alpha: 0
+                    }, 1000);
 
                 createjs.Ticker.setFPS(60);
                 createjs.Ticker.addEventListener("tick", stage);
