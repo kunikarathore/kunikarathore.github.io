@@ -88,7 +88,8 @@
         stage.addChild(pikachu);
         stage.addChild(tomato);
         stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
-
+        
+        // function to close the mouth of pikachu
         function stop(){
         	pikachu.gotoAndPlay("stop");
         }
@@ -101,11 +102,11 @@
 
             if (keys[32]) {
 
-          // ================= calling pikachu sprite ========================================
-          pikachu.gotoAndPlay("eat");
+          // ================= calling pikachu sprite to open mouth  =========================
+            pikachu.gotoAndPlay("eat");
 
          //=================== Tween for tomato (movement) ===================================
-                createjs.Tween.get(tomato).wait(1000).to({
+                createjs.Tween.get(tomato).to({
                         x: 225,
                         y: 450,
                         scaleX: 1,
@@ -115,13 +116,13 @@
                         y: 180,
                         scaleX: 1.5,
                         scaleY: 1.5
-                    }, 2000, createjs.Ease.quadOut)
+                    }, 1000, createjs.Ease.quadOut)
                     .to({
                         x: 245,
                         y: 275,
                         scaleX: 0,
                         scaleY: 0
-                    }, 2000, createjs.Ease.quadOut).call(stop);
+                    }, 1000, createjs.Ease.quadOut).call(stop);
 
                 createjs.Ticker.setFPS(60);
                 createjs.Ticker.addEventListener("tick", stage);
