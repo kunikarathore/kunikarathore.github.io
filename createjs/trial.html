@@ -6,12 +6,17 @@
     <title>Pokemon Go</title>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
-    var stage, tomato, bg, tom, pikachu;
+    var stage, tomato, bg, tom, pik, pikachu;
     var keys = {};
+    var soundID = "bounce";
 
     function init() {
     	// =================== STAGE ==========================
         stage = new createjs.Stage("myCanvas");
+
+        // ================== sound ===========================
+        createjs.Sound.registerSound("bounce.ogg", soundID);
+
         // ===========adding a background =====================
         var image1 = new Image();
         image1.src = "background1.jpg";
@@ -34,6 +39,8 @@
 
          // ===========Container FOR static tomato ====================
         tom = new createjs.Container();
+        // ===========Container FOR static pika ====================
+        pik = new createjs.Container();
         
 
         
@@ -81,6 +88,19 @@
 
             stage.update();
         }
+
+        // ===========adding image of pikachu ==================
+         var image3 = new Image();
+        image3.src = "pikachu.png";
+        image3.onload = handlePikaLoad;
+
+           function handlePikaLoad(event) {
+            var image3 = event.target;
+            var bitmap3 = new createjs.Bitmap(image3);
+            pik.addChild(bitmap3);
+
+            stage.update();
+        }
         
         //============= on press of space bar ==================
         this.document.onkeydown = keydown;
@@ -89,6 +109,7 @@
         
         stage.addChild(bg);
         stage.addChild(tom);
+        stage.addChild(pik);
         stage.addChild(pikachu);
         stage.addChild(tomato);
         stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
@@ -105,6 +126,7 @@
             keys[event.keyCode] = true;
 
             if (keys[32]) {
+            	playSound();
 
           // ================= calling pikachu sprite to open mouth  =========================
             pikachu.gotoAndPlay("eat");
@@ -155,6 +177,9 @@
         }
 
     }
+    function playSound () {
+        createjs.Sound.play(soundID);
+      }
 
     </script>
 </head>
@@ -163,7 +188,7 @@
     <canvas id="myCanvas" width="500" height="500"></canvas>
     <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
-    <!--<script src="http://code.createjs.com/soundjs-0.5.2.min.js"/> -->
+    <script src="http://code.createjs.com/soundjs-0.5.2.min.js"/>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 </body>
 
