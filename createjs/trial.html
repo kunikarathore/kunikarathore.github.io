@@ -6,7 +6,7 @@
     <title>Pokemon Go</title>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
-    var stage, tomato, bg, pika, pikachu;
+    var stage, tomato, bg, tom, pikachu;
     var keys = {};
 
     function init() {
@@ -32,8 +32,9 @@
         // ===========Container FOR bg ====================
         bg = new createjs.Container();
 
-         // ===========Container FOR bg ====================
-        pika = new createjs.Container();
+         // ===========Container FOR static tomato ====================
+        tom = new createjs.Container();
+        
 
         
 
@@ -65,15 +66,18 @@
         pikachu = new createjs.Sprite(data);
 
         
-        // ===========adding image of pikachu ==================
-        var image2 = new Image();
-        image2.src = "pikachu.png";
-        image2.onload = handlePikaLoad;
+        // ===========adding image of static tomato ==================
+         var image2 = new Image();
+        image2.src = "tomato.png";
+        image2.onload = handleTomatoLoad;
 
-           function handlePikaLoad(event) {
+           function handleTomatoLoad(event) {
             var image2 = event.target;
             var bitmap2 = new createjs.Bitmap(image2);
-            pika.addChild(bitmap2);
+            tom.addChild(bitmap2);
+            tom.x = 225;
+            tom.y = 500;
+            tom.scaleX = tom.scaleY = 0.5;
 
             stage.update();
         }
@@ -84,7 +88,7 @@
         //====================================================
         
         stage.addChild(bg);
-        //stage.addChild(pika);
+        stage.addChild(tom);
         stage.addChild(pikachu);
         stage.addChild(tomato);
         stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
@@ -104,6 +108,18 @@
 
           // ================= calling pikachu sprite to open mouth  =========================
             pikachu.gotoAndPlay("eat");
+            createjs.Tween.get(tom).to({
+                        x: 225,
+                        y: 500,
+                        scaleX: 0.5,
+                        scaleY: 0.5
+                    })
+                       .to({
+                        x: 225,
+                        y: 450,
+                        scaleX: 1,
+                        scaleY: 1
+                    }, 1000);
 
          //=================== Tween for tomato (movement) ===================================
                 createjs.Tween.get(tomato).to({
