@@ -6,7 +6,7 @@
     <title>Pokemon Go</title>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script>
-    var stage, tomato, bg, tom, pik, pikachu;
+    var stage, tomato, bg, tom, pik, cutout, pikachu;
     var keys = {};
     var soundID = "bounce";
 
@@ -15,7 +15,7 @@
         stage = new createjs.Stage("myCanvas");
 
         // ================== sound ===========================
-        createjs.Sound.registerSound("bounce.ogg", soundID);
+        createjs.Sound.registerSound("Toing.ogg", soundID);
 
         // ===========adding a background =====================
         var image1 = new Image();
@@ -39,8 +39,12 @@
 
          // ===========Container FOR static tomato ====================
         tom = new createjs.Container();
+
         // ===========Container FOR static pika ====================
         pik = new createjs.Container();
+
+        // ===========Container FOR cutout ====================
+        cutout = new createjs.Container();
         
 
         
@@ -57,6 +61,20 @@
             tomato.x = 225;
             tomato.y = 450;
             tomato.scaleX = tomato.scaleY = 1;
+
+            stage.update();
+        }
+        
+        // ===========adding image of cutout ==================
+        var image4 = new Image();
+        image4.src = "cutout.png";
+        image4.onload = handleCutoutLoad;
+
+           function handleCutoutLoad(event) {
+            var image4 = event.target;
+            var bitmap4 = new createjs.Bitmap(image4);
+            cutout.addChild(bitmap4);
+            
 
             stage.update();
         }
@@ -112,12 +130,16 @@
         stage.addChild(pik);
         stage.addChild(pikachu);
         stage.addChild(tomato);
+
         stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
         
         // function to close the mouth of pikachu
         function stop(){
         	pikachu.gotoAndPlay("stop");
+        	//stage.addChild(cutout);
+        	
         }
+        // comparision of time 
 
         //====================================================================================
            // =============== function called after pressing of space bar ====================
@@ -126,6 +148,8 @@
             keys[event.keyCode] = true;
 
             if (keys[32]) {
+
+            
             	playSound();
 
           // ================= calling pikachu sprite to open mouth  =========================
@@ -166,7 +190,7 @@
                 createjs.Ticker.addEventListener("tick", stage);
 
             }
-
+             
           
             stage.update();
         }
