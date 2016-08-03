@@ -119,16 +119,37 @@ function init() {
 
     stage.addChild(bg);
     stage.addChild(tom);
-    stage.addChild(pik);
+    //stage.addChild(pik);
     stage.addChild(pikachu);
     stage.addChild(tomato);
     stage.addChild(cutout);
     cutout.visible = false;
 
+    //============================== movement of pikachu =================================
+
+                 function run(){
+                    createjs.Tween.get(pikachu).to({
+                    x: 120,
+                    y: 0
+                }, 2000)
+                 .to({
+                    x: -120,
+                    y: 0
+                }, 2000).call(run);
+                 }
+                     createjs.Tween.get(pikachu).to({
+                    x: 120,
+                    y: 0
+                }, 2000)
+                 .to({
+                    x: -120,
+                    y: 0
+                }, 2000).call(run);
+
     stage.setChildIndex(tomato, stage.getNumChildren() + 1000);
 
     // function to close the mouth of pikachu
-    function stop() {
+     function stop() {
         pikachu.gotoAndPlay("stop");
         cutout.visible = true;
         cutout.alpha = 1;
@@ -139,10 +160,10 @@ function init() {
         }, 1000);
 
     }
-    // comparision of time 
+    
 
     //====================================================================================
-    // =============== function called after pressing of space bar ====================
+    // =============== function called after pressing of space bar =======================
     //====================================================================================
     function keydown(event) {
         keys[event.keyCode] = true;
@@ -201,9 +222,12 @@ function init() {
 
         delete keys[event.keyCode];
     }
-
+createjs.Ticker.setFPS(60);
+            createjs.Ticker.addEventListener("tick", stage);
 }
 
 function playSound() {
     createjs.Sound.play(soundID);
 }
+
+
