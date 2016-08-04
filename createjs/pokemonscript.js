@@ -1,4 +1,4 @@
-var stage, tomato, bg, tom, pik, cutout, pikachu;
+var stage, tomato, bg, tom, fallTom, cutout, pikachu, fallY;
 var keys = {};
 var soundID = "bounce";
 
@@ -33,8 +33,10 @@ function init() {
     tom = new createjs.Container();
 
     // ===========Container FOR static pika ====================
-    pik = new createjs.Container();
-
+    fallTom = new createjs.Container();
+    fallTom.x = 200;
+    fallTom.y = 355;
+    fallTom.scaleX = fallTom.scaleY = 0.5;
     // ===========Container FOR cutout ====================
     cutout = new createjs.Container();
 
@@ -101,13 +103,13 @@ function init() {
 
     // ===========adding image of pikachu ==================
     var image3 = new Image();
-    image3.src = "pikachu.png";
+    image3.src = "tomato.png";
     image3.onload = handlePikaLoad;
 
     function handlePikaLoad(event) {
         var image3 = event.target;
         var bitmap3 = new createjs.Bitmap(image3);
-        pik.addChild(bitmap3);
+        fallTom.addChild(bitmap3);
 
         stage.update();
     }
@@ -119,7 +121,7 @@ function init() {
 
     stage.addChild(bg);
     stage.addChild(tom);
-    //stage.addChild(pik);
+    
     stage.addChild(pikachu);
     stage.addChild(tomato);
     stage.addChild(cutout);
@@ -163,7 +165,7 @@ function init() {
 
     function stop2() {
         pikachu.gotoAndPlay("stop");
-        
+        stage.addChild(fallTom);
 
         
 
@@ -242,6 +244,7 @@ function init() {
                     scaleX: 0.5,
                     scaleY: 0.5
                 }, 500, createjs.Ease.quadOut).call(stop2); // stop function to close the mouth of the pokemon
+
 
     }
 
