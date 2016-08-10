@@ -1,4 +1,4 @@
-var stage, tomato, bg, tom, fallTom, cutout, pikachu, fallY;
+var stage, tomato, bg, tom, fallTom, cutout, pikachu, fallx;
 var keys = {};
 var soundID = "bounce";
 
@@ -34,6 +34,7 @@ function init() {
 
     // ===========Container FOR static pika ====================
     fallTom = new createjs.Container();
+    fallx = 355;
     fallTom.x = 200;
     fallTom.y = 355;
     fallTom.scaleX = fallTom.scaleY = 0.5;

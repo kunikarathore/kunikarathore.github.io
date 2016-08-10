@@ -1,6 +1,8 @@
-var stage, tomato, bg, tom, pik, cutout, pikachu;
+var stage, tomato, bg, tom, fallTom, cutout, pikachu, fallx;
 var keys = {};
+var fall = [];
 var soundID = "bounce";
+
 
 function init() {
     // =================== STAGE ==========================
@@ -33,8 +35,11 @@ function init() {
     tom = new createjs.Container();
 
     // ===========Container FOR static pika ====================
-    pik = new createjs.Container();
-
+    fallTom = new createjs.Container();
+    fallx = 245;
+    
+    fallTom.y = 357;
+    fallTom.scaleX = fallTom.scaleY = 0.5;
     // ===========Container FOR cutout ====================
     cutout = new createjs.Container();
 
@@ -101,13 +106,13 @@ function init() {
 
     // ===========adding image of pikachu ==================
     var image3 = new Image();
-    image3.src = "pikachu.png";
+    image3.src = "tomato.png";
     image3.onload = handlePikaLoad;
 
     function handlePikaLoad(event) {
         var image3 = event.target;
         var bitmap3 = new createjs.Bitmap(image3);
-        pik.addChild(bitmap3);
+        fallTom.addChild(bitmap3);
 
         stage.update();
     }
@@ -119,7 +124,7 @@ function init() {
 
     stage.addChild(bg);
     stage.addChild(tom);
-    //stage.addChild(pik);
+    
     stage.addChild(pikachu);
     stage.addChild(tomato);
     stage.addChild(cutout);
@@ -163,11 +168,19 @@ function init() {
 
     function stop2() {
         pikachu.gotoAndPlay("stop");
+        //stage.addChild(fallTom);
+        fallTom.x = fallx;
         
-
         
 
     }
+    var x = 0;
+    var txt = new createjs.Text();
+        txt.font = "bold 40px Dorsa";
+        txt.color = "black";
+        txt.x = 450;
+        txt.y = 30;
+        stage.addChild(txt);
     
 
     //====================================================================================
@@ -217,6 +230,10 @@ function init() {
                     scaleX: 0,
                     scaleY: 0
                 }, 500, createjs.Ease.quadOut).call(stop); // stop function to close the mouth of the pokemon
+                // adding no. of tomatoes eaten 
+                 x++;
+                 txt.text = x;
+              //  document.getElementById('total').innerHTML = x;
         
     } else{
          createjs.Tween.get(tomato).to({
@@ -237,11 +254,13 @@ function init() {
                     scaleY: 0.5
                 }, 500, createjs.Ease.quadOut)
                 .to({
-                    x: 245,
+                    x: fallx,
                     y: 355,
                     scaleX: 0.5,
                     scaleY: 0.5
                 }, 500, createjs.Ease.quadOut).call(stop2); // stop function to close the mouth of the pokemon
+                
+                
 
     }
 
