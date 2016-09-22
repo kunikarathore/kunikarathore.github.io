@@ -39,9 +39,3 @@
             renderer.render( scene, camera );
             }
             render();
-
-
-        // ============= LEARN THROUGH THESE WEBSITE ===================
-
-// https://aerotwist.com/tutorials/getting-started-with-three-js/
-// http://davidscottlyons.com/threejs/presentations/frontporch14/#slide-48 

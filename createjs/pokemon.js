@@ -105,17 +105,7 @@ function init() {
     }
 
     // ===========adding image of pikachu ==================
-    var image3 = new Image();
-    image3.src = "tomato.png";
-    image3.onload = handlePikaLoad;
-
-    function handlePikaLoad(event) {
-        var image3 = event.target;
-        var bitmap3 = new createjs.Bitmap(image3);
-        fallTom.addChild(bitmap3);
-
-        stage.update();
-    }
+    
 
     //============= on press of space bar ==================
     this.document.onkeydown = keydown;
@@ -124,6 +114,7 @@ function init() {
 
     stage.addChild(bg);
     stage.addChild(tom);
+    stage.addChild(fallTom);
     
     stage.addChild(pikachu);
     stage.addChild(tomato);
@@ -261,7 +252,17 @@ function init() {
                 }, 500, createjs.Ease.quadOut).call(stop2); // stop function to close the mouth of the pokemon
                 
                 
+var image3 = new Image();
+    image3.src = "tomato.png";
+    image3.onload = handlePikaLoad;
 
+    function handlePikaLoad(event) {
+        var image3 = event.target;
+        var bitmap3 = new createjs.Bitmap(image3);
+        fallTom.addChild(bitmap3);
+bitmap3.x += 2;
+        stage.update();
+    }
     }
 
 
