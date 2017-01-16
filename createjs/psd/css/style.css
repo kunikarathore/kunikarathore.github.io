@@ -1,0 +1,35 @@
+.nav{
+	    background: black;
+}
+
+.nav_div_main {
+    background: #e14718;
+    border-radius: 63px;
+    padding: 14px 16px;
+    margin-right: 10px;
+    color: white;
+    display: -webkit-inline-box;
+    text-align: center;
+
+}
+.nav_div{
+	    float: right;
+}
+.nav_div_main:hover{
+/* ----this is for normal hover
+	color: white;
+    text-decoration: none;
+    padding: 45px 20px;
+
+*/
+    color: #e14718;
+    text-decoration: none;
+    
+    background: #f8d405;
+}
+.nav_div_main a span{
+	padding: 5px;
+}
+.nav_div_main a{
+	    color: white;
+}
